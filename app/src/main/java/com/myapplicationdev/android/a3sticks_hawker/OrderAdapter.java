@@ -44,6 +44,12 @@ class OrderAdapter extends ArrayAdapter<Order> {
         // Get the ImageView object
         btnView = (Button) rowView.findViewById(R.id.btnView);
 
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // The parameter "position" is the index of the
         // Row ListView is requesting.
