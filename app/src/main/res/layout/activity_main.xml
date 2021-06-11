@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <include
+        layout="@layout/top_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -15,7 +16,6 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="55dp"
         android:paddingLeft="10dp"
         android:paddingTop="15dp"
         android:text="TextView"
@@ -24,7 +24,6 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
