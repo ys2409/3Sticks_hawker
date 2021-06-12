@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import com.loopj.android.http.*;
+import cz.msebera.android.httpclient.*;
+
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
