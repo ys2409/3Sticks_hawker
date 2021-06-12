@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MenuFragment">
+    tools:context=".MenuFragment"
+    android:background="@android:color/black">
 
     <include
         layout="@layout/top_toolbar"
