@@ -1,4 +1,7 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
-public class TimeActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class TimeActivity extends AppCompatActivity {
+
 }
