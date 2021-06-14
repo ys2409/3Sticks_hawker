@@ -3,14 +3,14 @@ package com.myapplicationdev.android.a3sticks_hawker;
 public class FoodItem {
     private int id;
     private String name;
-    private String price;
-    private String additional;
+    private Double price;
+    private String special;
 
-    public FoodItem(int id, String name, String price, String additional) {
+    public FoodItem(int id, String name, Double price, String special) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.additional = additional;
+        this.special = special;
     }
 
     public int getId() {
@@ -29,19 +29,19 @@ public class FoodItem {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getAdditional() {
-        return additional;
+    public String getSpecial() {
+        return special;
     }
 
-    public void setAdditional(String additional) {
-        this.additional = additional;
+    public void setSpecial(String special) {
+        this.special = special;
     }
 }

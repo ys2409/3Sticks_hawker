@@ -8,7 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +79,27 @@ public class MenuFragment extends Fragment {
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title);
         tb.setText("Orders");
+
+        ArrayList<FoodItem> items = new ArrayList<FoodItem>();
+        ArrayAdapter<FoodItem> aaItems = null;
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://10.0.2.2/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                //called when response HTTP status is "200 OK"
+                try {
+                    for(int i = 0; i<response.length(); i++){
+                        JSONObject m = (JSONObject)response.get(i);
+                        FoodItem item = new FoodItem(m.getInt("food_item_id"), m.getString("name"), m.getDouble("price"), m.getString("special"));
+                        items.add(item);
+                    }
+                } catch(JSONException e){
+
+                }
+                aaItems.notifyDataSetChanged();
+            }
+        });
 
         return view;    }
 }

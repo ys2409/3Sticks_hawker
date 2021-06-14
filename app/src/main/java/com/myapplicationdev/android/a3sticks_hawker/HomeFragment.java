@@ -13,7 +13,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,7 +86,9 @@ public class HomeFragment extends Fragment {
         tb.setText("Orders");
 
         orders = new ArrayList<Order>();
+        ArrayAdapter<Order> aaOrders = null;
         aa = new OrdersAdapter(getActivity(), R.layout.row, orders);
+
         lvOrder.setAdapter(aa);
 
         lvOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,6 +98,25 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://10.0.2.2/3Sticks_hawker/getOrders.php", new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                //called when response HTTP status is "200 OK"
+                try {
+                    for(int i = 0; i<response.length(); i++){
+                        JSONObject o = (JSONObject)response.get(i);
+                        Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"));
+                        orders.add(order);
+                    }
+                } catch(JSONException e){
+
+                }
+                aaOrders.notifyDataSetChanged();
+            }
+        });
+
         return view;
     }
 }

@@ -57,7 +57,7 @@ class OrdersAdapter extends ArrayAdapter<Order> {
         Order currentOrder = order.get(position);
         // Set the TextView to show the food
 
-        tvOrder.setText("Order " + currentOrder.getNum());
+        tvOrder.setText("Order " + currentOrder.getId());
         // Set the image to star or nonstar accordingly
         if(currentOrder.isNewOrder()){
             btnView.setText("New");
