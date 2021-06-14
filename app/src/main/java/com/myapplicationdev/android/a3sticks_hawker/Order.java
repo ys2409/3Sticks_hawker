@@ -4,14 +4,16 @@ public class Order {
     private int id;
     private String[] items;
     private Double total_price;
+    private String special;
     private boolean newOrder;
     private boolean ready;
 
 
-    public Order(int id, String[] items, Double total_price) {
+    public Order(int id, String[] items, Double total_price, String special) {
         this.id = id;
         this.items = items;
         this.total_price = total_price;
+        this.special = special;
     }
 
     public int getId() {
@@ -36,6 +38,14 @@ public class Order {
 
     public void setTotal_price(Double total_price) {
         this.total_price = total_price;
+    }
+
+    public String getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(String special) {
+        this.special = special;
     }
 
     public boolean isNewOrder() {

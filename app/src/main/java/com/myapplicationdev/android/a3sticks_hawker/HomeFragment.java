@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
                 try {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject o = (JSONObject)response.get(i);
-                        Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"));
+                        Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"), o.getString("special"));
                         orders.add(order);
                     }
                 } catch(JSONException e){
