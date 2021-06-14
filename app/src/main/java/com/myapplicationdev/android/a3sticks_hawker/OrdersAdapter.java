@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-class OrderAdapter extends ArrayAdapter<Order> {
+class OrdersAdapter extends ArrayAdapter<Order> {
     private ArrayList<Order> order;
     private Context context;
     private TextView tvOrder;
     private Button btnView;
 
-    public OrderAdapter(Context context, int resource, ArrayList<Order> objects){
+    public OrdersAdapter(Context context, int resource, ArrayList<Order> objects){
         super(context, resource, objects);
         // Store the food that is passed to this adapter
         order = objects;

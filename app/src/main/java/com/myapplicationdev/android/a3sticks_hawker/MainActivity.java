@@ -1,47 +1,74 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import androidx.fragment.app.Fragment;
+
 
 import java.util.ArrayList;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.loopj.android.http.*;
 import cz.msebera.android.httpclient.*;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+    BottomNavigationView bottomNavigation;
     Toolbar toolbar;
-    ListView lvOrder;
-    ArrayList<Order> orders;
-    ArrayAdapter aa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        lvOrder = (ListView) this.findViewById(R.id.listview);
         toolbar = findViewById(R.id.top_toolbar);
-        TextView tb = findViewById(R.id.toolbar_title);
-        tb.setText("Orders");
+        setSupportActionBar(toolbar);
 
-        orders = new ArrayList<Order>();
-        aa = new OrderAdapter(this, R.layout.row, orders);
-        lvOrder.setAdapter(aa);
+        loadFragment(new HomeFragment());
 
-        lvOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(this);
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
     }
+    public boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.nav_menu:
+                fragment = new HomeFragment();
+                break;
+            case R.id.nav_account:
+                fragment = new ProfileFragment();
+                break;
+        }
+
+        return loadFragment(fragment);
+    }
+
 }

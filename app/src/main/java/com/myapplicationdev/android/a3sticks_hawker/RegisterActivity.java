@@ -3,13 +3,15 @@ package com.myapplicationdev.android.a3sticks_hawker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import com.loopj.android.http.*;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cz.msebera.android.httpclient.*;
+import cz.msebera.android.httpclient.Header;
 
 
 public class RegisterActivity extends AppCompatActivity {
