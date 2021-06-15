@@ -30,11 +30,14 @@
         android:id="@+id/etNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Ph"
+        android:inputType="textPersonName"
+        android:text="Phone Number"
         android:textAlignment="center"
-        android:text="Phone Number" />
+        android:textColor="@color/teal_200"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/etPassword"
