@@ -79,6 +79,8 @@ public class ProfileFragment extends Fragment {
 
         ArrayList<Profile> alProfile = new ArrayList<Profile>();
         ArrayAdapter<Profile> aaProfile = null;
+        TextView tvStallName;
+        TextView tvOwnerName;
         
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -86,6 +88,7 @@ public class ProfileFragment extends Fragment {
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title);
         tb.setText("Orders");
+
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://10.0.2.2/c302_sakila/getProfile.php", new JsonHttpResponseHandler(){
