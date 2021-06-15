@@ -30,9 +30,15 @@
             android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/teal_700"/>
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             tools:src="@tools:sample/avatars" />
 
@@ -43,6 +49,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:layout_marginTop="25dp"
             android:textSize="25dp"
             android:text="TextView" />
 
@@ -53,25 +60,32 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:layout_marginTop="10dp"
             android:textSize="20dp"
             android:text="TextView" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="25dp"
             android:text="logout" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="25dp"
             android:text="change password" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="25dp"
             android:text="set fixed timing" />
     </LinearLayout>
 
