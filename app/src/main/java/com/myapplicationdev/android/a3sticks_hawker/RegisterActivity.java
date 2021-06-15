@@ -2,8 +2,10 @@ package com.myapplicationdev.android.a3sticks_hawker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.loopj.android.http.*;
 
@@ -18,11 +20,22 @@ import cz.msebera.android.httpclient.*;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    EditText etNum;
+    EditText etPassword;
+    EditText etEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        etNum = findViewById(R.id.etNum);
+        etPassword = findViewById(R.id.etPassword);
+        etEmail = findViewById(R.id.etEmail);
+
+        etNum.setHintTextColor(Color.WHITE);
+        etPassword.setHintTextColor(Color.WHITE);
+        etEmail.setHintTextColor(Color.WHITE);
 
     }
 
