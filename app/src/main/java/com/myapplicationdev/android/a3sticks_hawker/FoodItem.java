@@ -4,13 +4,11 @@ public class FoodItem {
     private int id;
     private String name;
     private Double price;
-    private String special;
 
-    public FoodItem(int id, String name, Double price, String special) {
+    public FoodItem(int id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.special = special;
     }
 
     public int getId() {
@@ -37,11 +35,4 @@ public class FoodItem {
         this.price = price;
     }
 
-    public String getSpecial() {
-        return special;
-    }
-
-    public void setSpecial(String special) {
-        this.special = special;
-    }
 }

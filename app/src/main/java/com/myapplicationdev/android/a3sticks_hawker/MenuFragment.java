@@ -91,7 +91,7 @@ public class MenuFragment extends Fragment {
                 try {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject m = (JSONObject)response.get(i);
-                        FoodItem item = new FoodItem(m.getInt("food_item_id"), m.getString("name"), m.getDouble("price"), m.getString("special"));
+                        FoodItem item = new FoodItem(m.getInt("food_item_id"), m.getString("name"), m.getDouble("price"));
                         items.add(item);
                     }
                 } catch(JSONException e){
