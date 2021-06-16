@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new HomeFragment();
                 break;
             case R.id.nav_menu:
-                fragment = new HomeFragment();
+                fragment = new MenuFragment();
                 break;
             case R.id.nav_account:
                 fragment = new ProfileFragment();
