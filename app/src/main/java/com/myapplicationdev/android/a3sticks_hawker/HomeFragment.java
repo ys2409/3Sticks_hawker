@@ -113,10 +113,11 @@ public class HomeFragment extends Fragment {
                         Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"), o.getString("special"));
                         orders.add(order);
                     }
-                } catch(JSONException e){
+                    aaOrders.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
 
                 }
-                aaOrders.notifyDataSetChanged();
             }
         });
 
