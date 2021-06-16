@@ -78,7 +78,7 @@ public class MenuFragment extends Fragment {
 
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title);
-        tb.setText("Orders");
+        tb.setText("Menu");
 
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
         ArrayAdapter<FoodItem> aaItems = null;
