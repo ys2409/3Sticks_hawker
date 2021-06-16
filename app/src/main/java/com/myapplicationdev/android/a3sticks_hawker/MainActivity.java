@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 tvTitle.setText("Home");
                 break;
             case R.id.nav_menu:
-                fragment = new HomeFragment();
+                fragment = new MenuFragment();
                 tvTitle.setText("Menu");
                 break;
             case R.id.nav_account:
