@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -95,6 +96,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), OrderFragment.class);
+                startActivity(intent);
 
             }
         });

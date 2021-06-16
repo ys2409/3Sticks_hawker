@@ -83,6 +83,8 @@ public class OrderFragment extends Fragment {
         ArrayList<Order> items = new ArrayList<Order>();
         ArrayAdapter<Order> aaItems = null;
 
+
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://10.0.2.2/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){
             @Override
