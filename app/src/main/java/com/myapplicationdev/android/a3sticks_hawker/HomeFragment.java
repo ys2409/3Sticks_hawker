@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         lvOrder = (ListView) view.findViewById(R.id.listview);
         toolbar = view.findViewById(R.id.top_toolbar);
-        TextView tb = view.findViewById(R.id.toolbar_title);
+        TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Orders");
 
         orders = new ArrayList<Order>();

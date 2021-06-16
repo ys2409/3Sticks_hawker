@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.top_toolbar);
-        tvTitle = findViewById(R.id.toolbar_title);
+        tvTitle = findViewById(R.id.toolbar_title1);
 
         loadFragment(new HomeFragment());
 
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         Fragment fragment = null;
+        tvTitle = findViewById(R.id.toolbar_title1);
 
         switch (item.getItemId()) {
             case R.id.nav_home:

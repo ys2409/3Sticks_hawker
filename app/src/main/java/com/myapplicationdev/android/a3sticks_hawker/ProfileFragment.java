@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         toolbar = view.findViewById(R.id.top_toolbar);
-        TextView tb = view.findViewById(R.id.toolbar_title);
+        TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Profile");
 
 
