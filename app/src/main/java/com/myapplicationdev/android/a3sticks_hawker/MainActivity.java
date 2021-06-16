@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.top_toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         loadFragment(new HomeFragment());
 
@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_navbar_menu, menu);
+
+        return true;
     }
 
     @Override
