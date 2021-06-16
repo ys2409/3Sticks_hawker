@@ -25,13 +25,14 @@ import cz.msebera.android.httpclient.*;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     BottomNavigationView bottomNavigation;
     Toolbar toolbar;
-
+    TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.top_toolbar);
+        tvTitle = findViewById(R.id.toolbar_title);
 
         loadFragment(new HomeFragment());
 
@@ -59,12 +60,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.nav_home:
                 fragment = new HomeFragment();
+                tvTitle.setText("Home");
                 break;
             case R.id.nav_menu:
                 fragment = new HomeFragment();
+                tvTitle.setText("Menu");
                 break;
             case R.id.nav_account:
                 fragment = new ProfileFragment();
+                tvTitle.setText("Profile");
                 break;
         }
 
