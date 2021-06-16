@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment {
 
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title);
-        tb.setText("Orders");
+        tb.setText("Profile");
 
 
         AsyncHttpClient client = new AsyncHttpClient();
