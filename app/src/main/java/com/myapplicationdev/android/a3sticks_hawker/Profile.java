@@ -1,20 +1,10 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 public class Profile {
-    private int id;
     private String name;
 
-    public Profile(int id, String name) {
-        this.id = id;
+    public Profile(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

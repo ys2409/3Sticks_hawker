@@ -48,16 +48,17 @@ public class ProfileFragment extends Fragment {
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Profile");
 
+        RequestParams params = new RequestParams();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/c302_sakila/getProfile.php", new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/getProfile.php", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
                 try {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject profile = (JSONObject)response.get(i);
-                        Profile p = new Profile(profile.getInt("owner_id"), profile.getString("name"));
+                        Profile p = new Profile(profile.getString("name"));
                         alProfile.add(p);
                     }
                 } catch(JSONException e){
