@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,6 +35,7 @@ public class ProfileFragment extends Fragment {
     Profile profile;
     TextView tvStallName;
     TextView tvOwnerName;
+    Button btnChange;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +49,8 @@ public class ProfileFragment extends Fragment {
 
         tvOwnerName = view.findViewById(R.id.tvOwner);
         tvStallName = view.findViewById(R.id.tvStall);
+
+        btnChange = view.findViewById(R.id.btnChangePass);
 
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title1);
@@ -88,6 +93,13 @@ public class ProfileFragment extends Fragment {
 
                 }
                 //aaProfile.notifyDataSetChanged();
+            }
+        });
+
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
