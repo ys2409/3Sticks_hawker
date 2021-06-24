@@ -2,9 +2,11 @@ package com.myapplicationdev.android.a3sticks_hawker;
 
 public class Profile {
     private String name;
+    private String password;
 
-    public Profile(String name) {
+    public Profile(String name, String password) {
         this.name = name;
+        this.password = password;
     }
 
     public String getName() {
@@ -15,4 +17,11 @@ public class Profile {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -99,7 +99,8 @@ public class ProfileFragment extends Fragment {
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent a = new Intent(ProfileFragment.super.getContext(), ChangePassword.class);
+                startActivity(a);
             }
         });
 
