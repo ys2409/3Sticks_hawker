@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject profile = (JSONObject)response.get(i);
-                        Profile p = new Profile(profile.getString("name"));
+                        String p = profile.getString("name");
                         tvOwnerName.setText(p.toString());
                         //alProfile.add(p);
                     }
@@ -79,9 +79,9 @@ public class ProfileFragment extends Fragment {
                 //called when response HTTP status is "200 OK"
                 try {
                     for(int i = 0; i<response.length(); i++){
-                        JSONObject profile = (JSONObject)response.get(i);
-                        Profile p = new Profile(profile.getString("name"));
-                        tvStallName.setText(p.toString());
+                        JSONObject stall = (JSONObject)response.get(i);
+                        String s = stall.getString("name");
+                        tvStallName.setText(s.toString());
                         //alProfile.add(p);
                     }
                 } catch(JSONException e){
