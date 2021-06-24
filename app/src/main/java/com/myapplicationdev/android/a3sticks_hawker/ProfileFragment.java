@@ -31,6 +31,8 @@ public class ProfileFragment extends Fragment {
     ArrayList<Profile> alProfile = new ArrayList<>();
     ArrayAdapter<Profile> aaProfile;
     Profile profile;
+    TextView tvStallName;
+    TextView tvOwnerName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,11 +40,12 @@ public class ProfileFragment extends Fragment {
 
         ArrayList<Profile> alProfile = new ArrayList<Profile>();
         ArrayAdapter<Profile> aaProfile = null;
-        TextView tvStallName;
-        TextView tvOwnerName;
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        tvOwnerName = view.findViewById(R.id.tvOwner);
+        tvStallName = view.findViewById(R.id.tvStall);
 
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title1);
@@ -51,7 +54,7 @@ public class ProfileFragment extends Fragment {
         RequestParams params = new RequestParams();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/getProfile.php", new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
@@ -59,12 +62,32 @@ public class ProfileFragment extends Fragment {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject profile = (JSONObject)response.get(i);
                         Profile p = new Profile(profile.getString("name"));
-                        alProfile.add(p);
+                        tvOwnerName.setText(p.toString());
+                        //alProfile.add(p);
                     }
                 } catch(JSONException e){
 
                 }
-                aaProfile.notifyDataSetChanged();
+                //aaProfile.notifyDataSetChanged();
+            }
+        });
+
+        AsyncHttpClient client1 = new AsyncHttpClient();
+        client1.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                //called when response HTTP status is "200 OK"
+                try {
+                    for(int i = 0; i<response.length(); i++){
+                        JSONObject profile = (JSONObject)response.get(i);
+                        Profile p = new Profile(profile.getString("name"));
+                        tvStallName.setText(p.toString());
+                        //alProfile.add(p);
+                    }
+                } catch(JSONException e){
+
+                }
+                //aaProfile.notifyDataSetChanged();
             }
         });
 
