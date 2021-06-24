@@ -3,6 +3,8 @@ package com.myapplicationdev.android.a3sticks_hawker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import com.loopj.android.http.*;
+import cz.msebera.android.httpclient.*;
 
 import android.os.Bundle;
 import android.view.Menu;
