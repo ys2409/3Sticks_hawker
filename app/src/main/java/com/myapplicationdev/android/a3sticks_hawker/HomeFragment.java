@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
 
         orders = new ArrayList<Order>();
         ArrayAdapter<Order> aaOrders = null;
-        aa = new OrdersAdapter(getActivity(), R.layout.row, orders);
+        aa = new OrdersAdapter(getActivity(), R.layout.row1, orders);
 
         lvOrder.setAdapter(aa);
 

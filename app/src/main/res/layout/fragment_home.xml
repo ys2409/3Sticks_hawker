@@ -18,7 +18,7 @@
         android:layout_height="45dp"
         android:paddingLeft="10dp"
         android:paddingTop="15dp"
-        android:text="TextView"
+        android:text="Orders"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 

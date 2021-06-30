@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,10 @@ public class MenuFragment extends Fragment {
     GridAdapter gaItems;
     AsyncHttpClient client;
     Button btnAdd;
+    FoodItem foodItem;
+    Integer itemId;
+    String itemName;
+    Double price;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,12 +97,33 @@ public class MenuFragment extends Fragment {
         client = new AsyncHttpClient();
 
         toolbar = view.findViewById(R.id.top_toolbar);
-        btnAdd = view.findViewById(R.id.btnAdd);
+        btnAdd = view.findViewById(R.id.btnAddItem);
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Menu");
 
         gaItems = new GridAdapter(getContext(), R.layout.grid, alItems);
         gvItems.setAdapter(gaItems);
+
+
+        Bundle bundle = this.getArguments();
+        // getSerializable() not sure
+        if (foodItem!= null){
+            foodItem = (FoodItem) bundle.getSerializable("foodItem");
+            itemId = foodItem.getFoodId();
+            itemName = foodItem.getName();
+            price = foodItem.getPrice();
+        }
+
+
+        MenuFragment foodItem = new MenuFragment();
+        foodItem.setArguments(bundle);
+
+
+        RequestParams params = new RequestParams();
+        params.add("food_item_id", String.valueOf(itemId));
+        params.add("name", String.valueOf(itemName));
+        params.add("price", String.valueOf(price));
+
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){

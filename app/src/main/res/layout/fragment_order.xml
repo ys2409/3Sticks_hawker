@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvOrderNum"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="55dp"
@@ -27,6 +27,33 @@
             android:text="TextView"
             android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <ListView
+            android:id="@+id/listviewOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal: " />
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Button" />
+
     </LinearLayout>
 
 </FrameLayout>

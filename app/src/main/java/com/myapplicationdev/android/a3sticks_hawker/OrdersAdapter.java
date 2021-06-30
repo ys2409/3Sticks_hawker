@@ -37,7 +37,7 @@ class OrdersAdapter extends ArrayAdapter<Order> {
         // "inflate" the XML file into a View object
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         // "Inflate" the row.xml as the layout for the View object
-        View rowView = inflater.inflate(R.layout.row, parent, false);
+        View rowView = inflater.inflate(R.layout.row1, parent, false);
 
         // Get the TextView object
         tvOrder = (TextView) rowView.findViewById(R.id.tvOrder);

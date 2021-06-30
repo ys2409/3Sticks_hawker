@@ -59,6 +59,9 @@ public class EditMenuActivity extends AppCompatActivity {
         }
 
 
+        btnSold = findViewById(R.id.btnSold);
+        btnDel = findViewById(R.id.btnDel);
+
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +86,7 @@ public class EditMenuActivity extends AppCompatActivity {
                                         if (result.contains("Success")){
                                             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
                                             SharedPreferences.Editor prefEdit = prefs.edit();
-                                            prefEdit.remove("customerID");
+                                            prefEdit.remove("foodId");
                                             prefEdit.commit();
 
                                             getSupportFragmentManager()

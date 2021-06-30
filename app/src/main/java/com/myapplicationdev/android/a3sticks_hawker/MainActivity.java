@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.nav_home:
                 fragment = new HomeFragment();
-                tvTitle.setText("Home");
+                tvTitle.setText("Orders");
                 break;
             case R.id.nav_menu:
                 fragment = new MenuFragment();
