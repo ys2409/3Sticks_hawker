@@ -1,22 +1,24 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
-public class FoodItem {
-    private int id;
+import java.io.Serializable;
+
+public class FoodItem implements Serializable {
+    private int foodId;
     private String name;
     private Double price;
 
-    public FoodItem(int id, String name, Double price) {
-        this.id = id;
+    public FoodItem(int foodId, String name, Double price) {
+        this.foodId = foodId;
         this.name = name;
         this.price = price;
     }
 
-    public int getId() {
-        return id;
+    public int getFoodId() {
+        return foodId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
     }
 
     public String getName() {

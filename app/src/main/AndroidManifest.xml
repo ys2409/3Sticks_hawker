@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.3Sticks_hawker">
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".ChangePassword"></activity>
-        <activity android:name=".TimeActivity"></activity>
+        <activity android:name=".AddFoodItemActivity"></activity>
+        <activity android:name=".EditMenuActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".TimeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

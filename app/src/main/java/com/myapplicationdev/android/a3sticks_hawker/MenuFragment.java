@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -8,7 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,6 +34,11 @@ import cz.msebera.android.httpclient.Header;
  */
 public class MenuFragment extends Fragment {
     Toolbar toolbar;
+    GridView gvItems;
+    ArrayList<FoodItem> alItems;
+    GridAdapter gaItems;
+    AsyncHttpClient client;
+    Button btnAdd;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,28 +86,61 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
+
+        gvItems = view.findViewById(R.id.gridView);
+        alItems = new ArrayList<FoodItem>();
+        client = new AsyncHttpClient();
+
         toolbar = view.findViewById(R.id.top_toolbar);
+        btnAdd = view.findViewById(R.id.btnAdd);
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Menu");
 
-        ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        ArrayAdapter<FoodItem> aaItems = null;
+        gaItems = new GridAdapter(getContext(), R.layout.grid, alItems);
+        gvItems.setAdapter(gaItems);
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
                 try {
-                    for(int i = 0; i<response.length(); i++){
-                        JSONObject m = (JSONObject)response.get(i);
-                        FoodItem item = new FoodItem(m.getInt("food_item_id"), m.getString("name"), m.getDouble("price"));
-                        items.add(item);
-                    }
-                } catch(JSONException e){
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject food = (JSONObject) response.get(i);
+                        int id = food.getInt("food_item_id");
+                        String name = food.getString("name");
+                        double price = food.getDouble("price");
 
+                        FoodItem foodItem = new FoodItem(id, name, price);
+
+                        alItems.add(foodItem);
+                    }
+
+                    gaItems.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                aaItems.notifyDataSetChanged();
+            }
+        });
+
+        gvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                FoodItem food = alItems.get(position);
+                bundle.putSerializable("food", food);
+
+                Intent b = new Intent(MenuFragment.super.getContext(), EditMenuActivity.class);
+                startActivity(b);
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent c = new Intent(MenuFragment.super.getContext(), AddFoodItemActivity.class);
+                startActivity(c);
             }
         });
 
