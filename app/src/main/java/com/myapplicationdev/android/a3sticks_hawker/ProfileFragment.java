@@ -119,7 +119,8 @@ public class ProfileFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent c = new Intent(ProfileFragment.super.getContext(), LoginActivity.class);
+                startActivity(c);
             }
         });
 
