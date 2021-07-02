@@ -2,6 +2,8 @@ package com.myapplicationdev.android.a3sticks_hawker;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button showHideBtn;
     EditText etPassword;
+    Button btnRegister;
 
     int view = R.layout.activity_main;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         showHideBtn = findViewById(R.id.showHideBtn);
         etPassword = findViewById(R.id.etPassword);
+        btnRegister = findViewById(R.id.btnRegisterLogin);
 
         showHideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,5 +43,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(a);
+            }
+        });
     }
 }

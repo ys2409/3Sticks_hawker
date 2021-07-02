@@ -85,17 +85,17 @@
 
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnRegisterLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="148dp"
             android:background="#FFBB86FC"
             android:text="Register" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"

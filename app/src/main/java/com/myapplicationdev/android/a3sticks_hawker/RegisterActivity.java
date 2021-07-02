@@ -29,13 +29,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        etNum = findViewById(R.id.etNum);
-        etPassword = findViewById(R.id.etPassword);
-        etEmail = findViewById(R.id.etEmail);
-
-        etNum.setHintTextColor(Color.WHITE);
-        etPassword.setHintTextColor(Color.WHITE);
-        etEmail.setHintTextColor(Color.WHITE);
+        etNum = findViewById(R.id.etNumberRegister);
+        etPassword = findViewById(R.id.etPasswordRegister);
+        etEmail = findViewById(R.id.etEmailRegister);
 
     }
 
