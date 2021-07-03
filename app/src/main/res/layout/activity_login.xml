@@ -31,29 +31,78 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Ph"
+        android:hint="Phone Number"
         android:inputType="textPersonName"
-        android:text="Phone Number"
+        android:singleLine="false"
         android:textAlignment="center"
+        android:backgroundTint="@color/teal_200"
         android:textColor="@color/teal_200"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/teal_200" />
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Password" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:inputType="textPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:hint="Password"
+            android:ems="10"
+            android:backgroundTint="@color/teal_200"
+            android:textColorHint="@color/teal_200"
+            android:textColor="@color/teal_200"
+            android:layout_gravity="center"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/showHideBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Login" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnRegisterLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="148dp"
+            android:background="#FFBB86FC"
+            android:text="Register" />
+
+        <Button
+            android:id="@+id/btnForgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginTop="60dp"
+            android:background="#FFBB86FC"
+            android:text="Forgot Password" />
+
+    </LinearLayout>
 
 </LinearLayout>

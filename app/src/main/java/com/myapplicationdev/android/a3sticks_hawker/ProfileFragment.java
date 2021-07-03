@@ -37,6 +37,7 @@ public class ProfileFragment extends Fragment {
     TextView tvOwnerName;
     Button btnChange;
     Button btnTime;
+    Button btnLogout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,7 @@ public class ProfileFragment extends Fragment {
 
         btnChange = view.findViewById(R.id.btnChangePass);
         btnTime = view.findViewById(R.id.btnSetTime);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title1);
@@ -111,6 +113,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Intent b = new Intent(ProfileFragment.super.getContext(), TimeActivity.class);
                 startActivity(b);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent c = new Intent(ProfileFragment.super.getContext(), LoginActivity.class);
+                startActivity(c);
             }
         });
 
