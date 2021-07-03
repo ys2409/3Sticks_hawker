@@ -56,7 +56,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp"
         android:orientation="horizontal">
 
 
@@ -81,6 +82,13 @@
             android:inputType="time" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Save" />
 
 
 </LinearLayout>
