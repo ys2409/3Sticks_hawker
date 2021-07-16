@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -107,7 +108,7 @@ public class MenuFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         // getSerializable() not sure
-        if (foodItem!= null){
+        if (foodItem != null) {
             foodItem = (FoodItem) bundle.getSerializable("foodItem");
             itemId = foodItem.getFoodId();
             itemName = foodItem.getName();
@@ -126,7 +127,7 @@ public class MenuFragment extends Fragment {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
@@ -170,5 +171,13 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        return view;    }
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Can do codes to reload listview in this function
+
+    }
 }

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/black"
+    android:orientation="vertical"
     tools:context=".AddFoodItemActivity">
 
     <include
         layout="@layout/top_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/foodImg3"
@@ -24,14 +24,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="80dp"
             android:text="Name: "
             android:textColor="@color/white"
             android:textSize="25dp" />
@@ -40,48 +40,83 @@
             android:id="@+id/editTextTextPersonName3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:backgroundTintMode="add"
             android:ems="10"
+            android:hint="E.g. Set A"
             android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="#666666"
-            android:textSize="20dp"
-            android:backgroundTintMode="add"
-            android:hint="Set A" />
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/txPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Price: $"
             android:textColor="@color/white"
-            android:textSize="20dp"
-            android:text="Price: $" />
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/etPrice2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:ems="10"
-            android:hint="2.00"
+            android:hint="E.g. 2.00"
             android:inputType="numberDecimal"
             android:textColor="@color/white"
             android:textColorHint="#666666"
             android:textSize="20dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items in set:"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tvAddIncluded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="20dp"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:text="Add Items"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:text="Add" />
-
 
 </LinearLayout>
