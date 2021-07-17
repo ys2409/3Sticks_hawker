@@ -14,12 +14,21 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/foodImg3"
+        android:id="@+id/foodImg"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@color/white"
         android:padding="1dp"
-        android:scaleType="fitXY" />
+        android:src="@drawable/no_image"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_gravity="center"
+        android:text="Upload Image"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,8 @@ public class AddFoodItemActivity extends AppCompatActivity {
     TextView tvAddIncluded;
     SetItemAdapter itemAdapter;
     Toolbar toolbar;
+    ImageView foodImg;
+    Button btnUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class AddFoodItemActivity extends AppCompatActivity {
         alIncluded = new ArrayList<String>();
         etName = findViewById(R.id.editTextTextPersonName3);
         etPrice = findViewById(R.id.etPrice2);
+        foodImg = findViewById(R.id.foodImg);
+        btnUpload = findViewById(R.id.btnUpload);
 
         btnAddItem = findViewById(R.id.btnAdd);
         tvAddIncluded = findViewById(R.id.tvAddIncluded);
@@ -74,6 +79,13 @@ public class AddFoodItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -201,7 +213,7 @@ public class AddFoodItemActivity extends AppCompatActivity {
                     Toast.makeText(AddFoodItemActivity.this, msg, Toast.LENGTH_SHORT).show();
 
                     if (added) {
-
+                        finish();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -119,12 +119,10 @@ public class MenuFragment extends Fragment {
         MenuFragment foodItem = new MenuFragment();
         foodItem.setArguments(bundle);
 
-
         RequestParams params = new RequestParams();
         params.add("food_item_id", String.valueOf(itemId));
         params.add("name", String.valueOf(itemName));
         params.add("price", String.valueOf(price));
-
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
@@ -178,6 +176,35 @@ public class MenuFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // Can do codes to reload listview in this function
+        alItems.clear();
+        loadFoods();
+    }
 
+    public void loadFoods() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        String url = "https://3stickscustomer.000webhostapp.com/Customer/getAllFoods.php";
+        client.get(url, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                //called when response HTTP status is "200 OK"
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject food = (JSONObject) response.get(i);
+                        int id = food.getInt("food_item_id");
+                        String name = food.getString("name");
+                        double price = food.getDouble("price");
+
+                        FoodItem foodItem = new FoodItem(id, name, price);
+
+                        alItems.add(foodItem);
+                    }
+
+                    gaItems.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

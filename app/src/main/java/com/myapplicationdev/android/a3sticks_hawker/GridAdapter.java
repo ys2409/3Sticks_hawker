@@ -1,6 +1,7 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,9 @@ public class GridAdapter extends ArrayAdapter {
         ImageView foodImg = view.findViewById(R.id.foodImg);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         TextView tvPrice = view.findViewById(R.id.tvPrice);
+
+        tvTitle.setEllipsize(TextUtils.TruncateAt.END);
+        tvTitle.setMaxLines(1);
 
         FoodItem curr = alFoods.get(position);
 
