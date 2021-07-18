@@ -9,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class GridAdapter extends ArrayAdapter {
@@ -38,10 +42,24 @@ public class GridAdapter extends ArrayAdapter {
 
         FoodItem curr = alFoods.get(position);
 
+        String image = curr.getImage();
+
+        if (image.isEmpty()) {
+            foodImg.setImageResource(R.drawable.no_image);
+        } else {
+            Picasso.get()
+                    .load(image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.no_image)
+                    .into(foodImg);
+        }
+
         tvTitle.setText(curr.getName());
         String price = String.format("%.2f", curr.getPrice());
 
-        tvPrice.setText("$"+price);
+        tvPrice.setText("$" + price);
 
         return view;
     }

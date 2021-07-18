@@ -6,11 +6,19 @@ public class FoodItem implements Serializable {
     private int foodId;
     private String name;
     private Double price;
+    private String image;
 
     public FoodItem(int foodId, String name, Double price) {
         this.foodId = foodId;
         this.name = name;
         this.price = price;
+    }
+
+    public FoodItem(int foodId, String name, Double price, String image){
+        this.foodId = foodId;
+        this.name = name;
+        this.price = price;
+        this.image = image;
     }
 
     public int getFoodId() {
@@ -35,6 +43,14 @@ public class FoodItem implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setImage(String image){
+        this.image = image;
+    }
+
+    public String getImage(){
+        return image;
     }
 
 }

@@ -14,21 +14,40 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/foodImg"
+        android:id="@+id/foodImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/white"
         android:padding="1dp"
-        android:src="@drawable/no_image"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/no_image" />
 
-    <Button
-        android:id="@+id/btnUpload"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
         android:layout_gravity="center"
-        android:text="Upload Image"/>
+        android:layout_marginVertical="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:text="Upload Image" />
+
+        <Button
+            android:id="@+id/btnRemoveImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:layout_marginHorizontal="5dp"
+            android:text="Remove Image" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,21 +123,21 @@
 
         <TextView
             android:id="@+id/tvAddIncluded"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_marginHorizontal="20dp"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:text="Add Items"/>
+            android:text="Add Items"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/lvItems"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btnAdd"

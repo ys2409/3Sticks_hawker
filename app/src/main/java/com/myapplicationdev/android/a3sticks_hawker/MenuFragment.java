@@ -105,7 +105,6 @@ public class MenuFragment extends Fragment {
         gaItems = new GridAdapter(getContext(), R.layout.grid, alItems);
         gvItems.setAdapter(gaItems);
 
-
         Bundle bundle = this.getArguments();
         // getSerializable() not sure
         if (foodItem != null) {
@@ -124,30 +123,30 @@ public class MenuFragment extends Fragment {
         params.add("name", String.valueOf(itemName));
         params.add("price", String.valueOf(price));
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                //called when response HTTP status is "200 OK"
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject food = (JSONObject) response.get(i);
-                        int id = food.getInt("food_item_id");
-                        String name = food.getString("name");
-                        double price = food.getDouble("price");
-
-                        FoodItem foodItem = new FoodItem(id, name, price);
-
-                        alItems.add(foodItem);
-                    }
-
-                    gaItems.notifyDataSetChanged();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                //called when response HTTP status is "200 OK"
+//                try {
+//                    for (int i = 0; i < response.length(); i++) {
+//                        JSONObject food = (JSONObject) response.get(i);
+//                        int id = food.getInt("food_item_id");
+//                        String name = food.getString("name");
+//                        double price = food.getDouble("price");
+//
+//                        FoodItem foodItem = new FoodItem(id, name, price);
+//
+//                        alItems.add(foodItem);
+//                    }
+//
+//                    gaItems.notifyDataSetChanged();
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         gvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -193,8 +192,9 @@ public class MenuFragment extends Fragment {
                         int id = food.getInt("food_item_id");
                         String name = food.getString("name");
                         double price = food.getDouble("price");
+                        String image = food.getString("image");
 
-                        FoodItem foodItem = new FoodItem(id, name, price);
+                        FoodItem foodItem = new FoodItem(id, name, price, image);
 
                         alItems.add(foodItem);
                     }
