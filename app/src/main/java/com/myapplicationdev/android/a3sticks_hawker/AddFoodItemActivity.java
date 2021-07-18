@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -385,7 +386,6 @@ public class AddFoodItemActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1 && data != null) {
-                // Take picture with camera
                 Bundle extras = data.getExtras();
                 bitmap = (Bitmap) extras.get("data");
                 bitmap = getResizedBitmap(bitmap, 400);
@@ -409,6 +409,15 @@ public class AddFoodItemActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(AddFoodItemActivity.this, uri, projection, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
     public Uri getImageUri(Context context, Bitmap imageBitmap) {
@@ -439,23 +448,6 @@ public class AddFoodItemActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(AddFoodItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public String getPath(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-        cursor.close();
-
-        cursor = getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-
-        return path;
     }
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
