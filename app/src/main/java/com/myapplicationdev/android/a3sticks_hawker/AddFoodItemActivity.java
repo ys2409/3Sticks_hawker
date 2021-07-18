@@ -136,8 +136,6 @@ public class AddFoodItemActivity extends AppCompatActivity {
         btnRemoveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: upload image to database/server
-                // do codes to replace image with default image
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.no_image);
                 foodImg.setImageBitmap(bitmap);
                 filePath = Uri.parse("android.resource://com.myapplicationdev.android.a3sticks_hawker/"
