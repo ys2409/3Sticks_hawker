@@ -1,11 +1,13 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public class ProfileFragment extends Fragment {
     Button btnChange;
     Button btnTime;
     Button btnLogout;
+    //private AsyncHttpClient client;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,10 +63,13 @@ public class ProfileFragment extends Fragment {
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Profile");
 
-        RequestParams params = new RequestParams();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String ownerID = prefs.getString("owner_id", "");
 
+        RequestParams params = new RequestParams();
+        params.add("ownerID", ownerID);
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
@@ -81,24 +87,23 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        AsyncHttpClient client1 = new AsyncHttpClient();
-        client1.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                //called when response HTTP status is "200 OK"
-                try {
-                    for(int i = 0; i<response.length(); i++){
-                        JSONObject stall = (JSONObject)response.get(i);
-                        String s = stall.getString("name");
-                        tvStallName.setText(s.toString());
-                        //alProfile.add(p);
-                    }
-                } catch(JSONException e){
-
-                }
-                //aaProfile.notifyDataSetChanged();
-            }
-        });
+//        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", params, new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                //called when response HTTP status is "200 OK"
+//                try {
+//                    for(int i = 0; i<response.length(); i++){
+//                        JSONObject stall = (JSONObject)response.get(i);
+//                        String s = stall.getString("name");
+//                        tvStallName.setText(s.toString());
+//                        //alProfile.add(p);
+//                    }
+//                } catch(JSONException e){
+//
+//                }
+//                //aaProfile.notifyDataSetChanged();
+//            }
+//        });
 
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +124,14 @@ public class ProfileFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor prefEdit = prefs.edit();
+                prefEdit.remove("ownerID");
+                prefEdit.remove("name");
+                prefEdit.remove("password");
+                prefEdit.remove("number");
+                prefEdit.remove("stallID");
+                prefEdit.commit();
                 Intent c = new Intent(ProfileFragment.super.getContext(), LoginActivity.class);
                 startActivity(c);
             }
