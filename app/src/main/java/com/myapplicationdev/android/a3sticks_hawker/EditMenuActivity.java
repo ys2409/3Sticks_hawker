@@ -45,22 +45,30 @@ public class EditMenuActivity extends AppCompatActivity {
         TextView tb = findViewById(R.id.toolbar_title1);
         tb.setText("Edit Food Item");
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        tvName = findViewById(R.id.tvfoodName);
+        btnSold = findViewById(R.id.btnSold);
+        btnDel = findViewById(R.id.btnDel);
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         client = new AsyncHttpClient();
 
 
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
-        int foodId = prefs.getInt("foodId", -1);
+        int foodId = prefs.getInt("foodId", 1);
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = pref.getString("name", "");
+
 
         if (foodId == -1){
             tvName.setVisibility(View.GONE);
         }
-
-
-        btnSold = findViewById(R.id.btnSold);
-        btnDel = findViewById(R.id.btnDel);
+        else{
+            tvName.setText(String.valueOf(name));
+        }
 
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
