@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 try{
                     if(response.get("authenticated").toString().equals("false")){
-                        Toast.makeText(LoginActivity.this, "Login fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login fail" , Toast.LENGTH_SHORT).show();
                     } else {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = prefs.edit();
@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.commit();
                         Intent a = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(a);
+                        Log.d("TAG", response.get("owner_id").toString());
                     }
 
 

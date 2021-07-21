@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class ProfileFragment extends Fragment {
     Button btnChange;
     Button btnTime;
     Button btnLogout;
-    //private AsyncHttpClient client;
+    private AsyncHttpClient client;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,12 +64,15 @@ public class ProfileFragment extends Fragment {
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Profile");
 
+        client = new AsyncHttpClient();
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String ownerID = prefs.getString("owner_id", "");
+        String ownerID = prefs.getString("ownerID", "");
 
         RequestParams params = new RequestParams();
         params.add("ownerID", ownerID);
-        AsyncHttpClient client = new AsyncHttpClient();
+        Log.d("TAG", ownerID);
+
         client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -78,6 +82,7 @@ public class ProfileFragment extends Fragment {
                         JSONObject profile = (JSONObject)response.get(i);
                         String p = profile.getString("name");
                         tvOwnerName.setText(p.toString());
+                        Log.d("oooooooooooooo", p);
                         //alProfile.add(p);
                     }
                 } catch(JSONException e){
@@ -85,25 +90,33 @@ public class ProfileFragment extends Fragment {
                 }
                 //aaProfile.notifyDataSetChanged();
             }
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.d("Failed: ", responseString);
+            }
         });
 
-//        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", params, new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                //called when response HTTP status is "200 OK"
-//                try {
-//                    for(int i = 0; i<response.length(); i++){
-//                        JSONObject stall = (JSONObject)response.get(i);
-//                        String s = stall.getString("name");
-//                        tvStallName.setText(s.toString());
-//                        //alProfile.add(p);
-//                    }
-//                } catch(JSONException e){
-//
-//                }
-//                //aaProfile.notifyDataSetChanged();
-//            }
-//        });
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                //called when response HTTP status is "200 OK"
+                try {
+                    for(int i = 0; i<response.length(); i++){
+                        JSONObject stall = (JSONObject)response.get(i);
+                        String s = stall.getString("name");
+                        tvStallName.setText(s.toString());
+                        //alProfile.add(p);
+                    }
+                } catch(JSONException e){
+
+                }
+                //aaProfile.notifyDataSetChanged();
+            }
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.d("Failed: ", responseString);
+            }
+        });
 
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
