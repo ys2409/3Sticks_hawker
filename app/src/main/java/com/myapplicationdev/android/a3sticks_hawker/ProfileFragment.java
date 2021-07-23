@@ -72,8 +72,7 @@ public class ProfileFragment extends Fragment {
 
         RequestParams params = new RequestParams();
         params.add("ownerID", ownerID);
-        params.add("stallID", stallID);
-        Log.d("TAG", ownerID);
+
 
         client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
             @Override
@@ -83,8 +82,10 @@ public class ProfileFragment extends Fragment {
                     for(int i = 0; i<response.length(); i++){
                         JSONObject profile = (JSONObject)response.get(i);
                         String p = profile.getString("name");
-                        tvOwnerName.setText(p.toString());
-                        Log.d("oooooooooooooo", p);
+                        String stallName = profile.getString("stall_name");
+                        tvOwnerName.setText(p);
+                        tvStallName.setText(stallName);
+                        Log.d("oooooooooooooo",profile.toString());
                         //alProfile.add(p);
                     }
                 } catch(JSONException e){
@@ -98,27 +99,27 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", params, new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                //called when response HTTP status is "200 OK"
-                try {
-                    for(int i = 0; i<response.length(); i++){
-                        JSONObject stall = (JSONObject)response.get(i);
-                        String s = stall.getString("name");
-                        tvStallName.setText(s.toString());
-                        //alProfile.add(p);
-                    }
-                } catch(JSONException e){
-
-                }
-                //aaProfile.notifyDataSetChanged();
-            }
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Log.d("Failed: ", responseString);
-            }
-        });
+//        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getStallInfo.php", params, new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                //called when response HTTP status is "200 OK"
+//                try {
+//                    for(int i = 0; i<response.length(); i++){
+//                        JSONObject stall = (JSONObject)response.get(i);
+//                        String s = stall.getString("name");
+//                        tvStallName.setText(s.toString());
+//                        //alProfile.add(p);
+//                    }
+//                } catch(JSONException e){
+//
+//                }
+//                //aaProfile.notifyDataSetChanged();
+//            }
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                super.onFailure(statusCode, headers, responseString, throwable);
+//                Log.d("Failed: ", responseString);
+//            }
+//        });
 
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
