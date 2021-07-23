@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.loopj.android.http.*;
 
@@ -23,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etNum;
     EditText etPassword;
     EditText etEmail;
+    private AsyncHttpClient client;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,34 @@ public class RegisterActivity extends AppCompatActivity {
         etNum = findViewById(R.id.etNumberRegister);
         etPassword = findViewById(R.id.etPasswordRegister);
         etEmail = findViewById(R.id.etEmailRegister);
+        btnRegister = findViewById(R.id.btnRegister);
+
+        client = new AsyncHttpClient();
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RequestParams params = new RequestParams();
+                params.add("number", etNum.getText().toString());
+                params.add("password", etPassword.getText().toString());
+                params.add("email_address", etEmail.getText().toString());
+                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doRegister.php", params, new JsonHttpResponseHandler(){
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getApplicationContext(), "New user successfully created", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+
+        });
+
 
     }
 

@@ -68,9 +68,11 @@ public class ProfileFragment extends Fragment {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String ownerID = prefs.getString("ownerID", "");
+        String stallID = prefs.getString("stallID", "");
 
         RequestParams params = new RequestParams();
         params.add("ownerID", ownerID);
+        params.add("stallID", stallID);
         Log.d("TAG", ownerID);
 
         client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
