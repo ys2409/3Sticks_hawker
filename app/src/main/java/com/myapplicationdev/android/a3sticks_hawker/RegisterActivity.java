@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                 params.add("number", etNum.getText().toString());
                 params.add("password", etPassword.getText().toString());
                 params.add("email_address", etEmail.getText().toString());
-                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doRegister.php", params, new JsonHttpResponseHandler(){
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/doRegister.php", params, new JsonHttpResponseHandler(){
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

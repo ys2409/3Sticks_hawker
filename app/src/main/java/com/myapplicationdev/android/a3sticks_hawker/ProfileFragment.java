@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
         params.add("ownerID", ownerID);
 
 
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
+        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getProfile.php?ownerID=1", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"

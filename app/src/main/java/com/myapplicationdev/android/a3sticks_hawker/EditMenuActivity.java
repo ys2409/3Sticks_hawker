@@ -84,7 +84,7 @@ public class EditMenuActivity extends AppCompatActivity {
                         params.add("foodId", String.valueOf(foodId));
 
                         AsyncHttpClient client = new AsyncHttpClient();
-                        client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/deleteFoodItems.php", new JsonHttpResponseHandler(){
+                        client.post("https://3stickscustomer.000webhostapp.com/Hawker/deleteFoodItems.php", new JsonHttpResponseHandler(){
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                     try {

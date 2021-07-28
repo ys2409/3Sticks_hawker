@@ -41,7 +41,7 @@ public class OrderFragment extends Fragment {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getOrderById.php", new JsonHttpResponseHandler(){
+        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"

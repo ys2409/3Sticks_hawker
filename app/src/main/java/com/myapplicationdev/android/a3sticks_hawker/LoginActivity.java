@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.add("number", etNumber.getText().toString());
         params.add("password", etPassword.getText().toString());
-        client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doLogin.php", params, new JsonHttpResponseHandler(){
+        client.post("https://3stickscustomer.000webhostapp.com/Hawker/doLogin.php", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //called when response HTTP status is "200 OK"
