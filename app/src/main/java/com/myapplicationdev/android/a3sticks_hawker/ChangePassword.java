@@ -46,10 +46,10 @@ public class ChangePassword extends AppCompatActivity {
             public void onClick(View view) {
                 RequestParams params = new RequestParams();
                 params.add("ownerID", ownerID);
-                params.add("newPass", etPassword.getText().toString());
+                params.add("password", etPassword.getText().toString());
                 Log.d("TAG", params.toString());
 
-                client.post("https://3stickscustomer.000webhostapp.com/Hawker/editPassword.php", params, new JsonHttpResponseHandler(){
+                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/editPassword.php", params, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //called when response HTTP status is "200 OK"
@@ -60,6 +60,10 @@ public class ChangePassword extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         //aaProfile.notifyDataSetChanged();
+                    }
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                        Log.d("Failed: ", responseString);
                     }
 
                 });

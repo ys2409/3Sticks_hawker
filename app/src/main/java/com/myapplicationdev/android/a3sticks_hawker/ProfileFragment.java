@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
         params.add("ownerID", ownerID);
 
 
-        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getProfile.php?ownerID=1", params, new JsonHttpResponseHandler(){
+        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
                         JSONObject profile = (JSONObject)response.get(i);
                         String p = profile.getString("name");
                         String stallName = profile.getString("stall_name");
-                        tvOwnerName.setText(p);
+                        tvOwnerName.setText("Stall Name: " + p);
                         tvStallName.setText(stallName);
                         Log.d("oooooooooooooo",profile.toString());
                         //alProfile.add(p);

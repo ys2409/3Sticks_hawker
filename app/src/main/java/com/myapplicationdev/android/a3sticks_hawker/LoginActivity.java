@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText etNumber;
     private AsyncHttpClient client;
+    CheckBox checkBox;
 
     int view = R.layout.activity_main;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -42,21 +44,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        showHideBtn = findViewById(R.id.showHideBtn);
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegisterLogin);
         btnLogin = findViewById(R.id.btnLogin);
         etNumber = findViewById(R.id.etNum);
+        checkBox = findViewById(R.id.checkBox);
 
-        showHideBtn.setOnClickListener(new View.OnClickListener() {
+        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(showHideBtn.getText().toString().equals("Show")){
+                if(checkBox.getText().toString().equals("Show")){
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    showHideBtn.setText("Hide");
+                    checkBox.setText("Hide");
                 } else{
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    showHideBtn.setText("Show");
+                    checkBox.setText("Show");
                 }
             }
         });
@@ -99,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.add("number", etNumber.getText().toString());
         params.add("password", etPassword.getText().toString());
-        client.post("https://3stickscustomer.000webhostapp.com/Hawker/doLogin.php", params, new JsonHttpResponseHandler(){
+        client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doLogin.php", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //called when response HTTP status is "200 OK"

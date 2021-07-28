@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                 params.add("number", etNum.getText().toString());
                 params.add("password", etPassword.getText().toString());
                 params.add("email_address", etEmail.getText().toString());
-                client.post("https://3stickscustomer.000webhostapp.com/Hawker/doRegister.php", params, new JsonHttpResponseHandler(){
+                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doRegister.php", params, new JsonHttpResponseHandler(){
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -58,6 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                        Log.d("Failed: ", responseString);
                     }
                 });
 
