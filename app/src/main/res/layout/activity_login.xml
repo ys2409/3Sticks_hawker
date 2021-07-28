@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4E4C4C"
+    android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
-    android:background="@android:color/black">
+    tools:context=".LoginActivity">
 
     <include
         layout="@layout/top_toolbar"
@@ -26,82 +27,107 @@
         android:textColor="@color/white"
         android:textSize="35dp" />
 
-    <EditText
-        android:id="@+id/etNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:textAlignment="center"
-        android:backgroundTint="@color/teal_200"
-        android:textColor="@color/teal_200"
-        android:textColorHint="@color/teal_200" />
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/teal_200"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="number"
+            android:singleLine="false"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:textColorHint="@color/teal_200" />
 
         <EditText
             android:id="@+id/etPassword"
-            android:inputType="textPassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:hint="Password"
-            android:ems="10"
-            android:backgroundTint="@color/teal_200"
-            android:textColorHint="@color/teal_200"
-            android:textColor="@color/teal_200"
             android:layout_gravity="center"
-            android:textAlignment="center" />
+            android:backgroundTint="@color/teal_200"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:textColorHint="@color/teal_200" />
 
-        <Button
-            android:id="@+id/showHideBtn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show"/>
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="34dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:visibility="visible"
+                app:buttonTint="#000000"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:text="Show Password" />
+
+            <Button
+                android:id="@+id/btnForgot"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="Forgot Password"
+                android:textColor="#2E58C5"
+                android:textSize="12sp"
+                app:backgroundTint="#4E4C4C" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Login" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Login"
+            app:backgroundTint="#1D9E0D" />
 
         <Button
             android:id="@+id/btnRegisterLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:layout_weight="0"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="148dp"
-            android:background="#FFBB86FC"
-            android:text="Register" />
-
-        <Button
-            android:id="@+id/btnForgot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_marginTop="60dp"
-            android:background="#FFBB86FC"
-            android:text="Forgot Password" />
+            android:text="Register"
+            app:backgroundTint="#1D9E0D" />
 
     </LinearLayout>
 
