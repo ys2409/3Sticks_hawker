@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4E4C4C"
+    android:background="#000000"
     android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".LoginActivity">
@@ -78,15 +78,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:visibility="visible"
-                app:buttonTint="#1D9E0D"
+                app:buttonTint="@color/teal_200"
                 tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:textColor="#1D9E0D"
                 android:gravity="center|left"
+                android:textColor="@color/teal_200"
                 android:text="Show Password" />
 
             <Button
@@ -96,9 +96,9 @@
                 android:layout_gravity="right"
                 android:gravity="center"
                 android:text="Forgot Password"
-                android:textColor="#1D9E0D"
+                android:textColor="@color/teal_200"
                 android:textSize="12sp"
-                app:backgroundTint="#4E4C4C" />
+                app:backgroundTint="@color/black" />
 
         </LinearLayout>
 
@@ -118,7 +118,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:text="Login"
-            app:backgroundTint="#1D9E0D" />
+            android:textColor="@color/black"
+            app:backgroundTint="@color/teal_200" />
 
         <Button
             android:id="@+id/btnRegisterLogin"
@@ -128,7 +129,8 @@
             android:layout_marginTop="20dp"
             android:layout_weight="0"
             android:text="Register"
-            app:backgroundTint="#1D9E0D" />
+            android:textColor="@color/black"
+            app:backgroundTint="@color/teal_200" />
 
     </LinearLayout>
 

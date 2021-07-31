@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkBox.getText().toString().equals("Show")){
+                if(checkBox.getText().toString().equals("Hide")){
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     checkBox.setText("Hide");
                 } else{
