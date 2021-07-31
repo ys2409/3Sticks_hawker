@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,8 @@ public class TimeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.top_toolbar);
         toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
-        toolbar.setTitle("Opening Hours");
+        TextView tt = toolbar.findViewById(R.id.toolbar_title1);
+        tt.setText("Opening Hours");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
