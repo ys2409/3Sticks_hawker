@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,13 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order, container, false);
 
+//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+//            @Override
+//            public void onRefresh() {
+//
+//            }
+//        });
+
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Order");
@@ -39,24 +47,24 @@ public class OrderFragment extends Fragment {
         ArrayAdapter<Order> aaItems = null;
 
 
-
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler(){
+        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
                 try {
-                    for(int i = 0; i<response.length(); i++){
-                        JSONObject m = (JSONObject)response.get(i);
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject m = (JSONObject) response.get(i);
                         Order item = new Order(m.getInt("order_id"), new String[]{m.getString("food_items")}, m.getDouble("total_price"), m.getString("special"));
                         items.add(item);
                     }
-                } catch(JSONException e){
+                } catch (JSONException e) {
 
                 }
                 aaItems.notifyDataSetChanged();
             }
         });
+
         return view;
     }
 }

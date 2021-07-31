@@ -83,9 +83,8 @@ public class ProfileFragment extends Fragment {
                         JSONObject profile = (JSONObject)response.get(i);
                         String p = profile.getString("name");
                         String stallName = profile.getString("stall_name");
-                        tvOwnerName.setText("Stall Name: " + p);
+                        tvOwnerName.setText("Stall Owner: " + p);
                         tvStallName.setText(stallName);
-                        Log.d("oooooooooooooo",profile.toString());
                         //alProfile.add(p);
                     }
                 } catch(JSONException e){
