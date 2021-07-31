@@ -1,6 +1,8 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     private int id;
     private String[] items;
     private Double total_price;

@@ -19,5 +19,5 @@
         android:id="@+id/btnView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="view" />
+        android:text="New" />
 </LinearLayout>
