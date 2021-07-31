@@ -51,6 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         etNumber = findViewById(R.id.etNum);
         checkBox = findViewById(R.id.checkBox);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String ownerID = prefs.getString("ownerID", "");
+
+        if (!ownerID.equals("")) {
+            Intent a = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(a);
+        }
+
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
