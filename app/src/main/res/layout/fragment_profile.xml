@@ -35,13 +35,6 @@
             android:layout_height="2dp"
             android:background="@color/teal_700"/>
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            tools:src="@tools:sample/avatars" />
-
         <TextView
             android:id="@+id/tvStall"
             android:layout_width="match_parent"
