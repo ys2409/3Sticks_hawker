@@ -68,7 +68,7 @@ public class AddFoodItemActivity extends AppCompatActivity {
 
     Button btnAddItem;
     AsyncHttpClient client;
-    EditText etName, etPrice;
+    EditText etName, etPrice, etWaitTime;
     ArrayList<FoodItem> alItems;
     ListView lvItems;
     ArrayList<String> alIncluded;
@@ -101,6 +101,7 @@ public class AddFoodItemActivity extends AppCompatActivity {
         alIncluded = new ArrayList<String>();
         etName = findViewById(R.id.editTextTextPersonName3);
         etPrice = findViewById(R.id.etPrice2);
+        etWaitTime = findViewById(R.id.etWaitTime);
         foodImg = findViewById(R.id.foodImage);
         btnUpload = findViewById(R.id.btnUpload);
         btnRemoveImage = findViewById(R.id.btnRemoveImg);
@@ -203,6 +204,7 @@ public class AddFoodItemActivity extends AppCompatActivity {
 
                 String name = etName.getText().toString();
                 String price = etPrice.getText().toString();
+                String waitTime = etWaitTime.getText().toString();
 
                 if (name.isEmpty()) {
                     etName.setError("Please enter name");
@@ -210,8 +212,11 @@ public class AddFoodItemActivity extends AppCompatActivity {
                 if (price.isEmpty()) {
                     etPrice.setError("Please enter price");
                 }
+                if (waitTime.isEmpty()){
+                    etWaitTime.setError("Please enter estimated waiting time");
+                }
 
-                if (!name.isEmpty() && !price.isEmpty()) {
+                if (!name.isEmpty() && !price.isEmpty() && !waitTime.isEmpty()) {
                     addItem();
                 }
 
@@ -251,10 +256,12 @@ public class AddFoodItemActivity extends AppCompatActivity {
     public void addItem() {
         AsyncHttpClient client = new AsyncHttpClient();
         double price = Double.parseDouble(etPrice.getText().toString());
+        double waitTime = Double.parseDouble(etWaitTime.getText().toString());
 
         RequestParams params = new RequestParams();
         params.put("name", etName.getText().toString());
         params.put("price", String.format("%.2f", price));
+        params.put("waitTime", String.format("%.2f", waitTime));
         params.put("included", alIncluded);
 
         String url = "https://3stickscustomer.000webhostapp.com/Customer/addFoodItem.php";
