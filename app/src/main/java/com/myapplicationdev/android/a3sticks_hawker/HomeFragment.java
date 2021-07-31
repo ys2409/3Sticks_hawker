@@ -60,8 +60,10 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), OrderFragment.class);
-                startActivity(intent);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new OrderFragment())
+                        .commit();
 
             }
         });
