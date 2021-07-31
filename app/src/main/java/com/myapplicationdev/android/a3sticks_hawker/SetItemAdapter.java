@@ -33,10 +33,6 @@ public class SetItemAdapter extends ArrayAdapter {
 
         String curr = alIncluded.get(position);
 
-//        String[] item = curr.split("x");
-//        int quantity = Integer.parseInt(item[0].trim());
-//        String name = item[1].trim();
-
         TextView tvItem = view.findViewById(R.id.tvItem);
         ImageView btnRemove = view.findViewById(R.id.btnRemove);
 

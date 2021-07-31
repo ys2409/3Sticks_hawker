@@ -1,6 +1,8 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -27,6 +30,7 @@ public class ChangePassword extends AppCompatActivity {
     private AsyncHttpClient client;
     EditText etPassword;
     Button btnConfirm;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,21 @@ public class ChangePassword extends AppCompatActivity {
 
         etPassword = findViewById(R.id.etPassword);
         btnConfirm = findViewById(R.id.button);
+        toolbar = findViewById(R.id.top_toolbar);
+        TextView tt = toolbar.findViewById(R.id.toolbar_title1);
+        tt.setText("Change Password");
+        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ChangePassword.this);
         String ownerID = prefs.getString("ownerID", "");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangePassword.this.finish();
+            }
+        });
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,18 +65,19 @@ public class ChangePassword extends AppCompatActivity {
                 params.add("password", etPassword.getText().toString());
                 Log.d("TAG", params.toString());
 
-                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/editPassword.php", params, new JsonHttpResponseHandler(){
+                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/editPassword.php", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //called when response HTTP status is "200 OK"
                         try {
                             Toast.makeText(getApplicationContext(), "Password successfully updated", Toast.LENGTH_SHORT).show();
                             finish();
-                        } catch(Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         //aaProfile.notifyDataSetChanged();
                     }
+
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         super.onFailure(statusCode, headers, responseString, throwable);
                         Log.d("Failed: ", responseString);

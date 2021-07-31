@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,8 +187,10 @@ public class MenuFragment extends Fragment {
     }
 
     public void loadFoods() {
+        Links link = new Links();
+        String url = link.getAllFoods;
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/getAllFoods.php";
+
         client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -210,6 +213,12 @@ public class MenuFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i("menu fail", responseString);
             }
         });
     }

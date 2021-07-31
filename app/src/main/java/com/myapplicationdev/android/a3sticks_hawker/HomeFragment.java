@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     ArrayAdapter aa;
     SwipeRefreshLayout swipeRefresh;
 
-    public HomeFragment(){
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -60,34 +60,44 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), OrderFragment.class);
-                startActivity(intent);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new OrderFragment())
+                        .commit();
 
             }
         });
+
+        getOrders();
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                getOrders();
             }
         });
 
+        return view;
+    }
+
+    public void getOrders() {
+        orders.clear();
         Links links = new Links();
         String url = links.getOrders;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new JsonHttpResponseHandler(){
+        client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
                 try {
-                    for(int i = 0; i<response.length(); i++){
-                        JSONObject o = (JSONObject)response.get(i);
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject o = (JSONObject) response.get(i);
                         Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"), o.getString("special"));
                         orders.add(order);
                     }
                     aa.notifyDataSetChanged();
+                    swipeRefresh.setRefreshing(false);
                 } catch (JSONException e) {
                     e.printStackTrace();
 
@@ -100,7 +110,5 @@ public class HomeFragment extends Fragment {
                 Log.i("order error", responseString);
             }
         });
-
-        return view;
     }
 }

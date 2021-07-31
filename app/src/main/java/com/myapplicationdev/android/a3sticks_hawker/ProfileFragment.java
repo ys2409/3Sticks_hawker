@@ -64,7 +64,11 @@ public class ProfileFragment extends Fragment {
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Profile");
 
+        // for timeout (idk if it works)
         client = new AsyncHttpClient();
+        client.setTimeout(3000);
+        client.setResponseTimeout(3000);
+        client.setConnectTimeout(3000);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String ownerID = prefs.getString("ownerID", "");
@@ -73,8 +77,10 @@ public class ProfileFragment extends Fragment {
         RequestParams params = new RequestParams();
         params.add("ownerID", ownerID);
 
+        Links link = new Links();
+        String url = link.getProfile;
 
-        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getProfile.php", params, new JsonHttpResponseHandler(){
+        client.get(url, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
