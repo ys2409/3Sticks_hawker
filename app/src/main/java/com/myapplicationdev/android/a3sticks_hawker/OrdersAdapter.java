@@ -1,6 +1,7 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ class OrdersAdapter extends ArrayAdapter<Order> {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                
             }
         });
 

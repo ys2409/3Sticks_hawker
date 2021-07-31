@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_weight="1"
+        android:textColor="@color/white"
         android:text="Order" />
 
     <Button
