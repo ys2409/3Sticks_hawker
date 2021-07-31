@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox checkBox;
 
     int view = R.layout.activity_main;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,21 @@ public class LoginActivity extends AppCompatActivity {
         etNumber = findViewById(R.id.etNum);
         checkBox = findViewById(R.id.checkBox);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String ownerID = prefs.getString("ownerID", "");
+
+        if (!ownerID.equals("")) {
+            Intent a = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(a);
+        }
+
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkBox.getText().toString().equals("Hide")){
+                if (checkBox.getText().toString().equals("Hide")) {
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     checkBox.setText("Hide");
-                } else{
+                } else {
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     checkBox.setText("Show");
                 }
@@ -92,23 +101,26 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
     private void OnLogin(View v) {
         client = new AsyncHttpClient();
         // Point X - TODO: call doLogin web service to authenticate user
 
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        Links links = new Links();
+        String url = links.doLogin;
 
         RequestParams params = new RequestParams();
         params.add("number", etNumber.getText().toString());
         params.add("password", etPassword.getText().toString());
-        client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doLogin.php", params, new JsonHttpResponseHandler(){
+        client.post(url, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //called when response HTTP status is "200 OK"
 
-                try{
-                    if(response.get("authenticated").toString().equals("false")){
-                        Toast.makeText(LoginActivity.this, "Login fail" , Toast.LENGTH_SHORT).show();
+                try {
+                    if (response.get("authenticated").toString().equals("false")) {
+                        Toast.makeText(LoginActivity.this, "Login fail", Toast.LENGTH_SHORT).show();
                     } else {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = prefs.edit();
@@ -124,11 +136,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
 
-                }
-                catch(JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
 
             }

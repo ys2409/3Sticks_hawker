@@ -6,10 +6,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -25,6 +27,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class OrderFragment extends Fragment {
     Toolbar toolbar;
+    ListView listviewOrder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,15 +46,22 @@ public class OrderFragment extends Fragment {
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Order");
 
-        ArrayList<Order> items = new ArrayList<Order>();
-        ArrayAdapter<Order> aaItems = null;
+        listviewOrder = view.findViewById(R.id.listviewOrder);
 
+        ArrayList<Order> items = new ArrayList<Order>();
+        ArrayAdapter<Order> aaItems = new ArrayAdapter<Order>(getContext(), android.R.layout.simple_list_item_1, items);
+
+        listviewOrder.setAdapter(aaItems);
+
+        Links link = new Links();
+        String url = link.getOrders;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler() {
+        client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //called when response HTTP status is "200 OK"
+                Log.i("Order success", response.toString());
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject m = (JSONObject) response.get(i);
@@ -59,9 +69,15 @@ public class OrderFragment extends Fragment {
                         items.add(item);
                     }
                 } catch (JSONException e) {
-
+                    e.printStackTrace();
                 }
                 aaItems.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i("order error", responseString);
             }
         });
 
