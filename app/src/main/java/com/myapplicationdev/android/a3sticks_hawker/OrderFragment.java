@@ -59,13 +59,6 @@ public class OrderFragment extends Fragment {
         orderId = getArguments().getInt("id", -1);
         tvOrderId.setText(String.valueOf(orderId));
 
-//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
-//            @Override
-//            public void onRefresh() {
-//
-//            }
-//        });
-
         toolbar = view.findViewById(R.id.top_toolbar);
         TextView tb = view.findViewById(R.id.toolbar_title1);
         tb.setText("Order Details");

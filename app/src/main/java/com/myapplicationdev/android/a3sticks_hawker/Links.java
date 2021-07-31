@@ -6,4 +6,5 @@ public class Links {
     String doLogin = url + "doLogin.php";
     String getOrders = url + "getOrders.php";
     String getOrderById = url + "getOrderById.php";
+    String getProfile = url + "getProfile.php";
 }
