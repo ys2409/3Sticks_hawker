@@ -3,67 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderFragment"
-    android:background="@android:color/black">
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/black"
+    tools:context=".OrderFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <include
-        layout="@layout/top_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvOrderNum"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="55dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            android:text="TextView"
-            android:textColor="@color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        <ListView
-            android:id="@+id/listviewOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        </ListView>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subtotal: " />
-
-        <TextView
-            android:id="@+id/tvTotal"
+        <include
+            layout="@layout/top_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Button" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOrderNum"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="55dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/white" />
+
+            <ListView
+                android:id="@+id/listviewOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal: " />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Button" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

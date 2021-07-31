@@ -4,4 +4,6 @@ public class Links {
     String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/";
 
     String doLogin = url + "doLogin.php";
+    String getOrders = url + "getOrders.php";
+    String getOrderById = url + "getOrderById.php";
 }
