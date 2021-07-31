@@ -187,8 +187,10 @@ public class MenuFragment extends Fragment {
     }
 
     public void loadFoods() {
+        Links link = new Links();
+        String url = link.getAllFoods;
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/getAllFoods.php";
+
         client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
