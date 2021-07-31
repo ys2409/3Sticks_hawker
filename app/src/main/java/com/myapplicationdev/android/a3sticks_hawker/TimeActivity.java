@@ -31,6 +31,7 @@ public class TimeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.top_toolbar);
         toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
+        toolbar.setTitle("Opening Hours");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
