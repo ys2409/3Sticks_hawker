@@ -75,6 +75,7 @@ public class OrderFragment extends Fragment {
         ArrayList<Order> items = new ArrayList<Order>();
         ArrayAdapter<Order> aaItems = null;
 
+        Links links = new Links();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler() {

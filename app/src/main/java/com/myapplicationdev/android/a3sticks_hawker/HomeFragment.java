@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.container, new OrderFragment())
                         .commit();
-
             }
         });
 

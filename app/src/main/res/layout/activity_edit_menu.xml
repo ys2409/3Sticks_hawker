@@ -38,10 +38,10 @@
         android:layout_gravity="center"
         android:ems="10"
         android:textSize="20dp"
-        android:paddingBottom="50dp"
+        android:layout_marginBottom="50dp"
         android:textColor="@color/white"
         android:inputType="numberDecimal"
-        android:text="Price" />
+        android:text="Price: $" />
 
     <Button
         android:id="@+id/btnSold"

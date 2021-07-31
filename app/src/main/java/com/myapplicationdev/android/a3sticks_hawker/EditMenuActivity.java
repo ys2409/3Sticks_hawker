@@ -2,6 +2,7 @@ package com.myapplicationdev.android.a3sticks_hawker;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
@@ -9,6 +10,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -36,15 +39,17 @@ public class EditMenuActivity extends AppCompatActivity {
     ImageView imgFood;
     EditText etPrice;
     AsyncHttpClient client;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_menu);
 
+        toolbar = findViewById(R.id.top_toolbar);
         TextView tb = findViewById(R.id.toolbar_title1);
-        tb.setText("Edit Food Item");
-
+        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
 
         tvName = findViewById(R.id.tvfoodName);
         btnSold = findViewById(R.id.btnSold);
@@ -63,12 +68,19 @@ public class EditMenuActivity extends AppCompatActivity {
         String name = pref.getString("name", "");
 
 
-        if (foodId == -1){
+        if (foodId == -1) {
             tvName.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             tvName.setText(String.valueOf(name));
+            tb.setText(name);
         }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditMenuActivity.this.finish();
+            }
+        });
 
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,30 +96,30 @@ public class EditMenuActivity extends AppCompatActivity {
                         params.add("foodId", String.valueOf(foodId));
 
                         AsyncHttpClient client = new AsyncHttpClient();
-                        client.post("https://3stickscustomer.000webhostapp.com/Hawker/deleteFoodItems.php", new JsonHttpResponseHandler(){
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        String result = response.getString("result");
-                                        Toast.makeText(EditMenuActivity.this, result, Toast.LENGTH_SHORT).show();
+                        client.post("https://3stickscustomer.000webhostapp.com/Hawker/deleteFoodItems.php", new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                try {
+                                    String result = response.getString("result");
+                                    Toast.makeText(EditMenuActivity.this, result, Toast.LENGTH_SHORT).show();
 
-                                        if (result.contains("Success")){
-                                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
-                                            SharedPreferences.Editor prefEdit = prefs.edit();
-                                            prefEdit.remove("foodId");
-                                            prefEdit.commit();
+                                    if (result.contains("Success")) {
+                                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
+                                        SharedPreferences.Editor prefEdit = prefs.edit();
+                                        prefEdit.remove("foodId");
+                                        prefEdit.commit();
 
-                                            getSupportFragmentManager()
-                                                    .beginTransaction()
-                                                    .replace(R.id.container, new MenuFragment())
-                                                    .commit();
-                                        }
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                                        getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .replace(R.id.container, new MenuFragment())
+                                                .commit();
                                     }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            });
+                            }
+                        });
 
                     }
                 });
@@ -125,7 +137,7 @@ public class EditMenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(getApplicationContext(), MenuFragment.class);
         startActivityForResult(intent, 0);
         return true;
