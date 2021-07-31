@@ -72,7 +72,10 @@ public class OrderFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new HomeFragment())
+                        .commit();
             }
         });
 
@@ -90,7 +93,7 @@ public class OrderFragment extends Fragment {
                         JSONObject m = (JSONObject) response.get(i);
                         Order item = new Order(m.getInt("order_id"), new String[]{String.valueOf(m.getJSONArray("food_items"))}, m.getDouble("total_price"), m.getString("special"));
                         alOrder.add(item);
-                        if (String.valueOf(item.getId()) == String.valueOf(orderId)){
+                        if (String.valueOf(item.getId()) == String.valueOf(orderId)) {
                             tvTotal.setText(String.valueOf(item.getTotal_price()));
                             aa.add(item.getItems());
                             lvDetails.setAdapter(aa);

@@ -6,63 +6,54 @@
     android:background="@android:color/black"
     tools:context=".OrderFragment">
 
-    <LinearLayout
-        android:id="@+id/swiperefresh"
+    <include
+        layout="@layout/top_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="644dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tvOrderNum"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="55dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white" />
 
-        <include
-            layout="@layout/top_toolbar"
+        <ListView
+            android:id="@+id/listviewOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal: " />
+
+        <TextView
+            android:id="@+id/tvTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:text="TextView" />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="644dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvOrderNum"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="55dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/white" />
-
-            <ListView
-                android:id="@+id/listviewOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </ListView>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Subtotal: " />
-
-            <TextView
-                android:id="@+id/tvTotal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Button" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Button" />
 
     </LinearLayout>
 
