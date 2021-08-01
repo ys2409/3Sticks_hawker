@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -54,6 +55,8 @@ public class EditMenuActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvfoodName);
         btnSold = findViewById(R.id.btnSold);
         btnDel = findViewById(R.id.btnDel);
+        etPrice = findViewById(R.id.etPrice);
+        imgFood = findViewById(R.id.foodImg2);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
@@ -66,12 +69,14 @@ public class EditMenuActivity extends AppCompatActivity {
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String name = pref.getString("name", "");
+        String price = pref.getString("price", "");
 
 
         if (foodId == -1) {
             tvName.setVisibility(View.GONE);
         } else {
             tvName.setText(String.valueOf(name));
+            etPrice.setText(String.valueOf(price));
             tb.setText(name);
         }
 
