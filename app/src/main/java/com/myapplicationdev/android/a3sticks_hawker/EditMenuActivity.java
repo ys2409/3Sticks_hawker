@@ -85,7 +85,7 @@ public class EditMenuActivity extends AppCompatActivity {
             tvName.setVisibility(View.GONE);
         } else {
             tvName.setText(String.valueOf(name));
-            etPrice.setText(String.format("Price: $%.2f", price));
+            etPrice.setText(String.format("$%.2f", price));
 
             if (img.isEmpty()) {
                 imgFood.setImageResource(R.drawable.no_image);
@@ -167,8 +167,8 @@ public class EditMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 RequestParams params = new RequestParams();
                 params.add("foodId", String.valueOf(foodId));
-                double editprice = Double.parseDouble(etPrice.getText().toString());
-                params.put("price", String.format("%.2f", price));
+                Double editPrice = Double.parseDouble(etPrice.getText().toString());
+                params.put("price", String.format("%.2f", editPrice));
 
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.post("https://3stickscustomer.000webhostapp.com/Hawker/EditFoodItems.php", new JsonHttpResponseHandler() {
@@ -181,7 +181,7 @@ public class EditMenuActivity extends AppCompatActivity {
                             if (result.contains("Success")) {
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
                                 SharedPreferences.Editor prefEdit = prefs.edit();
-                                prefEdit.putString("price", String.valueOf(editprice));
+                                prefEdit.putString("price", String.valueOf(editPrice));
                                 prefEdit.commit();
 
                                 getSupportFragmentManager()
