@@ -31,6 +31,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.conn.params.ConnManagerParams;
+import cz.msebera.android.httpclient.params.HttpConnectionParams;
+import cz.msebera.android.httpclient.params.HttpParams;
 
 /**
  * A simple {@link Fragment} subclass.

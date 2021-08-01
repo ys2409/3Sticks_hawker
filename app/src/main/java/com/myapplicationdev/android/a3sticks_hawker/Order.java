@@ -10,6 +10,28 @@ public class Order implements Serializable {
     private boolean newOrder;
     private boolean ready;
 
+    // Alicia
+    private String cart_item_id;
+    private String verificationCode;
+    private String order_date;
+    private String name;
+    private int qty;
+    private String includes;
+
+    public Order(int id, String cart_item_id, String verificationCode, String date) {
+        this.id = id;
+        this.cart_item_id = cart_item_id;
+        this.verificationCode = verificationCode;
+        this.order_date = date;
+    }
+
+    public Order(int id, String name, int qty, double price, String includes) {
+        this.id = id;
+        this.name = name;
+        this.qty = qty;
+        this.total_price = price;
+        this.includes = includes;
+    }
 
     public Order(int id, String[] items, Double total_price, String special) {
         this.id = id;
@@ -64,5 +86,29 @@ public class Order implements Serializable {
 
     public void setReady(boolean ready) {
         this.ready = ready;
+    }
+
+    public String getCart_item_id() {
+        return cart_item_id;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public String getOrderDate() {
+        return order_date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public String getIncludes() {
+        return includes;
     }
 }

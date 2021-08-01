@@ -13,9 +13,9 @@
             android:id="@+id/tvqty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Quantity"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            android:text="TextView" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvitem"
@@ -23,24 +23,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingLeft="5dp"
+            android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            android:text="TextView" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:text="Price"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            android:text="TextView" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tvSpecial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Special" />
 
 </LinearLayout>
