@@ -38,7 +38,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class EditMenuActivity extends AppCompatActivity {
 
-    Button btnSold, btnDel;
+    Button btnSold, btnDel, btnUpdate;
     TextView tvName;
     ImageView imgFood;
     EditText etPrice;
@@ -59,6 +59,7 @@ public class EditMenuActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvfoodName);
         btnSold = findViewById(R.id.btnSold);
         btnDel = findViewById(R.id.btnDel);
+        btnUpdate = findViewById(R.id.btnUpdate);
         etPrice = findViewById(R.id.etPrice);
         imgFood = findViewById(R.id.foodImg2);
 
@@ -158,6 +159,42 @@ public class EditMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestParams params = new RequestParams();
+                params.add("foodId", String.valueOf(foodId));
+                double editprice = Double.parseDouble(etPrice.getText().toString());
+                params.put("price", String.format("%.2f", price));
+
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/EditFoodItems.php", new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            String result = response.getString("result");
+                            Toast.makeText(EditMenuActivity.this, result, Toast.LENGTH_SHORT).show();
+
+                            if (result.contains("Success")) {
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
+                                SharedPreferences.Editor prefEdit = prefs.edit();
+                                prefEdit.putString("price", String.valueOf(editprice));
+                                prefEdit.commit();
+
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container, new MenuFragment())
+                                        .commit();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
     }
