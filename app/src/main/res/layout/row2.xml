@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     android:padding="10dp">
 
     <LinearLayout
@@ -14,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity"
+            android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
 
@@ -23,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingLeft="5dp"
+            android:textColor="@color/white"
             android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
@@ -33,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="Price"
+            android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
     </LinearLayout>
@@ -41,6 +45,7 @@
         android:id="@+id/tvSpecial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="Special" />
 
 </LinearLayout>

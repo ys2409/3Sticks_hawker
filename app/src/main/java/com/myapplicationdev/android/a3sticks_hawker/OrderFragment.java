@@ -42,12 +42,14 @@ public class OrderFragment extends Fragment {
     ArrayList<Order> alOrder;
     ArrayAdapter aa;
     SwipeRefreshLayout swipeRefresh;
+//    ViewOrderAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order, container, false);
+
         tvOrderId = view.findViewById(R.id.tvOrderNum);
         tvTotal = view.findViewById(R.id.tvTotal);
         lvDetails = view.findViewById(R.id.listviewOrder);
@@ -79,6 +81,10 @@ public class OrderFragment extends Fragment {
 
         Links links = new Links();
 
+        alOrder = new ArrayList<Order>();
+//        adapter = new ViewOrderAdapter(getContext(), R.layout.row2, alOrder);
+//        lvDetails.setAdapter(adapter);
+
         getOrderById();
 
 //        AsyncHttpClient client = new AsyncHttpClient();
@@ -108,6 +114,9 @@ public class OrderFragment extends Fragment {
     }
 
     public void getOrderById() {
+        // setting to adapter
+
+
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.add("orderId", String.valueOf(orderId));
@@ -119,21 +128,25 @@ public class OrderFragment extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     Log.i("order", response.toString());
+                    // for order
+                    int id = response.getInt("order_id");
                     double total = response.getDouble("total_price");
                     tvTotal.setText(String.format("$%.2f", total));
+
+                    // for items in order
                     JSONArray cartItems = response.getJSONArray("cartItems");
-                    String allItems = "";
                     for (int i = 0; i < cartItems.length(); i++) {
                         JSONObject curr = cartItems.getJSONObject(i);
+                        String allItems = "";
 
                         Log.i(String.valueOf(i), curr.toString());
 
                         String name = curr.getString("name");
                         String items = curr.getString("items");
                         String additional = curr.getString("additional");
-                        String qty = curr.getString("quantity");
+                        int qty = curr.getInt("quantity");
                         String instructions = curr.getString("instructions");
-
+                        double price = curr.getDouble("total");
 
                         String[] includes = items.split(", ");
                         String[] additionals = additional.split(", ");
@@ -155,11 +168,7 @@ public class OrderFragment extends Fragment {
                         }
 
                         if (!currAdd.equals("")) {
-                            allItems += String.format("\n%s x %s \n%5s",
-                                    qty, name, currAdd);
-                        } else {
-                            allItems += String.format("\n%s x %s",
-                                    qty, name);
+                            allItems += String.format("\n%5s", currAdd);
                         }
 
                         if (!instructions.equals("")) {
@@ -167,9 +176,13 @@ public class OrderFragment extends Fragment {
                                     "", instructions);
                         }
 
+                        Order order = new Order(id, name, qty, price, allItems);
+                        alOrder.add(order);
+
                         Log.i(String.valueOf(i), allItems);
                     }
-
+                    ViewOrderAdapter adapter = new ViewOrderAdapter(getContext(), R.layout.row2, alOrder);
+                    lvDetails.setAdapter(adapter);
                 } catch (
                         JSONException e) {
                     e.printStackTrace();

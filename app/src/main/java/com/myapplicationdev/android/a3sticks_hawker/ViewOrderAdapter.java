@@ -17,8 +17,8 @@ public class ViewOrderAdapter extends ArrayAdapter {
     private Context context;
     ArrayList<Order> alOrders;
 
-    public ViewOrderAdapter(@NonNull Context context, int resource, ArrayList<Order> alOrders) {
-        super(context, resource);
+    public ViewOrderAdapter(Context context, int resource, ArrayList<Order> alOrders) {
+        super(context, resource, alOrders);
         this.context = context;
         this.alOrders = alOrders;
     }
@@ -26,7 +26,7 @@ public class ViewOrderAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row2, parent, false);
 
         TextView tvqty = rowView.findViewById(R.id.tvqty);
@@ -43,10 +43,10 @@ public class ViewOrderAdapter extends ArrayAdapter {
         tvitem.setText(name);
         tvqty.setText(qty + " x ");
 
-        tvprice.setText(String.valueOf(price));
+        tvprice.setText(String.format("$%.2f", price));
 
         tvSpecial.setText(includes);
 
-        return super.getView(position, convertView, parent);
+        return rowView;
     }
 }
