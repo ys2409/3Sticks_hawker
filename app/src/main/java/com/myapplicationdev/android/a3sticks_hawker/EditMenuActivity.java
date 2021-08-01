@@ -15,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,7 +86,7 @@ public class EditMenuActivity extends AppCompatActivity {
             tvName.setVisibility(View.GONE);
         } else {
             tvName.setText(String.valueOf(name));
-            etPrice.setText(String.format("$%.2f", price));
+            etPrice.setText(String.format("%.2f", price));
 
             if (img.isEmpty()) {
                 imgFood.setImageResource(R.drawable.no_image);
