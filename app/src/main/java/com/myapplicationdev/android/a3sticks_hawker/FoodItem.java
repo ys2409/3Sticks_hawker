@@ -1,12 +1,16 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class FoodItem implements Serializable {
     private int foodId;
     private String name;
     private Double price;
     private String image;
+
+    private ArrayList<String> alIncluded;
+    private String instructions;
 
     public FoodItem(int foodId, String name, Double price) {
         this.foodId = foodId;
@@ -53,4 +57,7 @@ public class FoodItem implements Serializable {
         return image;
     }
 
+    public ArrayList<String> getAlIncluded() {
+        return alIncluded;
+    }
 }

@@ -92,7 +92,8 @@ public class HomeFragment extends Fragment {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject o = (JSONObject) response.get(i);
-                        Order order = new Order(o.getInt("order_id"), new String[]{o.getString("food_items")}, o.getDouble("total_amount"), o.getString("special"));
+                        Order order = new Order(o.getInt("order_id"), o.getString("cart_item_id"),
+                                o.getString("verification_code"), o.getString("date"));
                         orders.add(order);
                     }
                     aa.notifyDataSetChanged();
