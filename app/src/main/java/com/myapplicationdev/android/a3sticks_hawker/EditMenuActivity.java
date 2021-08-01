@@ -27,6 +27,9 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +44,7 @@ public class EditMenuActivity extends AppCompatActivity {
     EditText etPrice;
     AsyncHttpClient client;
     Toolbar toolbar;
+    FoodItem foodItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +67,37 @@ public class EditMenuActivity extends AppCompatActivity {
 
         client = new AsyncHttpClient();
 
+        Intent intent = getIntent();
+        foodItem = (FoodItem) intent.getSerializableExtra("food");
 
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
         int foodId = prefs.getInt("foodId", 1);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String name = pref.getString("name", "");
-        String price = pref.getString("price", "");
+//        String price = pref.getString("price", "");
 
+        double price = foodItem.getPrice();
+        String img = foodItem.getImage();
 
         if (foodId == -1) {
             tvName.setVisibility(View.GONE);
         } else {
             tvName.setText(String.valueOf(name));
-            etPrice.setText(String.valueOf(price));
+            etPrice.setText(String.format("Price: $%.2f", price));
+
+            if (img.isEmpty()) {
+                imgFood.setImageResource(R.drawable.no_image);
+            } else {
+                Picasso.get()
+                        .load(img)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.no_image)
+                        .into(imgFood);
+            }
+
             tb.setText(name);
         }
 

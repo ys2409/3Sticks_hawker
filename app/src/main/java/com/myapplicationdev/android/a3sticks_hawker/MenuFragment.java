@@ -162,6 +162,7 @@ public class MenuFragment extends Fragment {
                 bundle.putSerializable("food", food);
 
                 Intent b = new Intent(MenuFragment.super.getContext(), EditMenuActivity.class);
+                b.putExtra("food", food);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("name", food.getName());
