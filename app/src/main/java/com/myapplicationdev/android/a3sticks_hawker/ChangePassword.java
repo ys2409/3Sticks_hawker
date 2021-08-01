@@ -57,6 +57,9 @@ public class ChangePassword extends AppCompatActivity {
             }
         });
 
+        Links link = new Links();
+        String url = link.editPassword;
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +68,7 @@ public class ChangePassword extends AppCompatActivity {
                 params.add("password", etPassword.getText().toString());
                 Log.d("TAG", params.toString());
 
-                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/editPassword.php", params, new JsonHttpResponseHandler() {
+                client.post(url, params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //called when response HTTP status is "200 OK"

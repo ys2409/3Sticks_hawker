@@ -8,4 +8,5 @@ public class Links {
     String getOrderById = url + "getOrderById.php";
     String getProfile = url + "getProfile.php";
     String getAllFoods = url + "getAllFoods.php";
+    String editPassword = url + "editPassword.php";
 }
