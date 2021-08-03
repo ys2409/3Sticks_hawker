@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import cz.msebera.android.httpclient.*;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etNum;
+    CheckBox checkBoxShow;
     EditText etPassword;
     EditText etEmail;
     private AsyncHttpClient client;
@@ -39,8 +43,22 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPasswordRegister);
         etEmail = findViewById(R.id.etEmailRegister);
         btnRegister = findViewById(R.id.btnRegister);
+        checkBoxShow = findViewById(R.id.checkBoxShow);
 
         client = new AsyncHttpClient();
+
+        checkBoxShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkBoxShow.getText().toString().equals("Hide")) {
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    checkBoxShow.setText("Hide");
+                } else {
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    checkBoxShow.setText("Show");
+                }
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
