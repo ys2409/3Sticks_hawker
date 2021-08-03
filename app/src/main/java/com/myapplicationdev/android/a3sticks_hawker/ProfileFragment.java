@@ -39,7 +39,6 @@ public class ProfileFragment extends Fragment {
     TextView tvStallName;
     TextView tvOwnerName;
     Button btnChange;
-    Button btnTime;
     Button btnLogout;
     private AsyncHttpClient client;
 
@@ -57,7 +56,6 @@ public class ProfileFragment extends Fragment {
         tvStallName = view.findViewById(R.id.tvStall);
 
         btnChange = view.findViewById(R.id.btnChangePass);
-        btnTime = view.findViewById(R.id.btnSetTime);
         btnLogout = view.findViewById(R.id.btnLogout);
 
         toolbar = view.findViewById(R.id.top_toolbar);
@@ -131,14 +129,6 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Intent a = new Intent(ProfileFragment.super.getContext(), ChangePassword.class);
                 startActivity(a);
-            }
-        });
-
-        btnTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent b = new Intent(ProfileFragment.super.getContext(), TimeActivity.class);
-                startActivity(b);
             }
         });
 

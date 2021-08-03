@@ -73,13 +73,6 @@
             android:layout_marginTop="25dp"
             android:text="change password" />
 
-        <Button
-            android:id="@+id/btnSetTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginTop="25dp"
-            android:text="set fixed timing" />
     </LinearLayout>
 
 </FrameLayout>

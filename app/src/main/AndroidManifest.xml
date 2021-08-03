@@ -19,7 +19,6 @@
         <activity android:name=".EditMenuActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".TimeActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
