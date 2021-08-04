@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -88,6 +89,8 @@ public class ChangePassword extends AppCompatActivity {
 
                 });
                 Log.d("TAG", "onCreate: ");
+                Intent y = new Intent(ChangePassword.this, LoginActivity.class);
+                startActivity(y);
             }
         });
     }
