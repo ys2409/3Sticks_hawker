@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPassword;
     Button btnRegister;
     Button btnLogin;
+    Button btnForgetPassword;
     EditText etNumber;
     private AsyncHttpClient client;
     CheckBox checkBox;
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         etNumber = findViewById(R.id.etNum);
         checkBox = findViewById(R.id.checkBox);
+        btnForgetPassword = findViewById(R.id.btnForgot);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
         String ownerID = prefs.getString("ownerID", "");
@@ -62,12 +64,10 @@ public class LoginActivity extends AppCompatActivity {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkBox.getText().toString().equals("Hide")) {
+                if (checkBox.isChecked() == true) {
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    checkBox.setText("Hide");
                 } else {
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    checkBox.setText("Show");
                 }
             }
         });
@@ -97,6 +97,14 @@ public class LoginActivity extends AppCompatActivity {
                     //proceed to authenticate user
                     OnLogin(view);
                 }
+            }
+        });
+
+        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent x = new Intent(LoginActivity.this, ChangePassword.class);
+                startActivity(x);
             }
         });
 
