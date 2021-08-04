@@ -1,10 +1,19 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -30,6 +39,8 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class OrderFragment extends Fragment {
     Toolbar toolbar;
     TextView tvOrderId, tvTotal;
@@ -43,6 +54,8 @@ public class OrderFragment extends Fragment {
     ArrayAdapter aa;
     SwipeRefreshLayout swipeRefresh;
 //    ViewOrderAdapter adapter;
+    int requestCode = 123;
+    int notificationID = 888;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +66,7 @@ public class OrderFragment extends Fragment {
         tvOrderId = view.findViewById(R.id.tvOrderNum);
         tvTotal = view.findViewById(R.id.tvTotal);
         lvDetails = view.findViewById(R.id.listviewOrder);
-        btnReady = view.findViewById(R.id.button2);
+        btnReady = view.findViewById(R.id.btnReady);
         toolbar = view.findViewById(R.id.top_toolbar);
         toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
@@ -86,6 +99,14 @@ public class OrderFragment extends Fragment {
 //        lvDetails.setAdapter(adapter);
 
         getOrderById();
+
+        btnReady.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // codes to notify customer when food is ready to collect
+
+            }
+        });
 
 //        AsyncHttpClient client = new AsyncHttpClient();
 //        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler() {
