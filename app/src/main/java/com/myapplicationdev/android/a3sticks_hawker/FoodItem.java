@@ -8,6 +8,7 @@ public class FoodItem implements Serializable {
     private String name;
     private Double price;
     private String image;
+    private boolean soldOut;
 
     private ArrayList<String> alIncluded;
     private String instructions;
@@ -18,11 +19,12 @@ public class FoodItem implements Serializable {
         this.price = price;
     }
 
-    public FoodItem(int foodId, String name, Double price, String image){
+    public FoodItem(int foodId, String name, Double price, String image, boolean soldOut){
         this.foodId = foodId;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.soldOut = soldOut;
     }
 
     public int getFoodId() {
@@ -55,6 +57,14 @@ public class FoodItem implements Serializable {
 
     public String getImage(){
         return image;
+    }
+
+    public boolean isSoldOut() {
+        return soldOut;
+    }
+
+    public void setSoldOut(boolean soldOut) {
+        this.soldOut = soldOut;
     }
 
     public ArrayList<String> getAlIncluded() {

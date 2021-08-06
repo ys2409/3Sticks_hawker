@@ -46,6 +46,7 @@ public class EditMenuActivity extends AppCompatActivity {
     AsyncHttpClient client;
     Toolbar toolbar;
     FoodItem foodItem;
+    Boolean sold = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +161,39 @@ public class EditMenuActivity extends AppCompatActivity {
         btnSold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sold = true;
                 tvSoldOut.setText("Sold Out");
+                btnSold.setText("Sell");
 
+                RequestParams params = new RequestParams();
+                params.add("foodId", String.valueOf(foodId));
+                params.add("soldOut", String.valueOf(sold));
+
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/EditFoodItems.php", new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            String result = response.getString("result");
+                            Toast.makeText(EditMenuActivity.this, result, Toast.LENGTH_SHORT).show();
+
+                            if (result.contains("Success")) {
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditMenuActivity.this);
+                                SharedPreferences.Editor prefEdit = prefs.edit();
+                                prefEdit.putBoolean("soldout", sold);
+                                prefEdit.commit();
+
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container, new MenuFragment())
+                                        .commit();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 

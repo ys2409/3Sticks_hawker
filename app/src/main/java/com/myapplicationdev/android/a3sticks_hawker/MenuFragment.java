@@ -51,6 +51,7 @@ public class MenuFragment extends Fragment {
     Integer itemId;
     String itemName;
     Double price;
+    Boolean sold = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -118,6 +119,7 @@ public class MenuFragment extends Fragment {
             itemId = foodItem.getFoodId();
             itemName = foodItem.getName();
             price = foodItem.getPrice();
+            sold = foodItem.isSoldOut();
         }
 
 
@@ -128,6 +130,7 @@ public class MenuFragment extends Fragment {
         params.add("food_item_id", String.valueOf(itemId));
         params.add("name", String.valueOf(itemName));
         params.add("price", String.valueOf(price));
+        params.add("soldOut", String.valueOf(sold));
 
 //        AsyncHttpClient client = new AsyncHttpClient();
 //        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
@@ -203,13 +206,24 @@ public class MenuFragment extends Fragment {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject food = (JSONObject) response.get(i);
                         int id = food.getInt("food_item_id");
-                        String name = food.getString("name");
-                        double price = food.getDouble("price");
-                        String image = food.getString("image");
+                        boolean soldOut = food.getBoolean("soldOut");
+                        if (soldOut == true){
+                            String name = food.getString("name");
+                            double price = food.getDouble("price");
+                            String image = food.getString("image");
 
-                        FoodItem foodItem = new FoodItem(id, name, price, image);
+                            FoodItem foodItem = new FoodItem(id, name, price, image , true);
+                            alItems.add(foodItem);
+                        }
+                        else {
+                            String name = food.getString("name");
+                            double price = food.getDouble("price");
+                            String image = food.getString("image");
 
-                        alItems.add(foodItem);
+                            FoodItem foodItem = new FoodItem(id, name, price, image , false);
+
+                            alItems.add(foodItem);
+                        }
                     }
 
                     gaItems.notifyDataSetChanged();
