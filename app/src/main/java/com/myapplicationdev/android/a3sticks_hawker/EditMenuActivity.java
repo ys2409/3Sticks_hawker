@@ -83,6 +83,7 @@ public class EditMenuActivity extends AppCompatActivity {
 
         double price = foodItem.getPrice();
         String img = foodItem.getImage();
+        Boolean sold = foodItem.isSoldOut();
 
         if (foodId == -1) {
             tvName.setVisibility(View.GONE);
@@ -161,9 +162,16 @@ public class EditMenuActivity extends AppCompatActivity {
         btnSold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soldOut = true;
-                tvSoldOut.setText("Sold Out");
-                btnSold.setText("Sell");
+                if (foodItem.isSoldOut() == false){
+                    soldOut = true;
+                    tvSoldOut.setText("Sold Out");
+                    btnSold.setText("Sell");
+                }
+                else {
+                    soldOut = false;
+                    tvSoldOut.setText("");
+                    btnSold.setText("Sold Out");
+                }
 
                 RequestParams params = new RequestParams();
                 params.add("foodId", String.valueOf(foodId));
