@@ -104,7 +104,8 @@
             android:inputType="numberDecimal"
             android:textColor="@color/white"
             android:textColorHint="#666666"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:text="5"/>
     </LinearLayout>
 
     <LinearLayout

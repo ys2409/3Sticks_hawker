@@ -40,7 +40,7 @@ import cz.msebera.android.httpclient.Header;
 public class EditMenuActivity extends AppCompatActivity {
 
     Button btnSold, btnDel, btnUpdate;
-    TextView tvName;
+    TextView tvName, tvSoldOut;
     ImageView imgFood;
     EditText etPrice;
     AsyncHttpClient client;
@@ -63,6 +63,7 @@ public class EditMenuActivity extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
         etPrice = findViewById(R.id.etPrice);
         imgFood = findViewById(R.id.foodImg2);
+        tvSoldOut = findViewById(R.id.tvSoldOut);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
@@ -159,6 +160,7 @@ public class EditMenuActivity extends AppCompatActivity {
         btnSold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvSoldOut.setText("Sold Out");
 
             }
         });
