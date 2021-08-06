@@ -51,7 +51,7 @@ public class MenuFragment extends Fragment {
     Integer itemId;
     String itemName;
     Double price;
-    Boolean sold = false;
+    Boolean soldOut = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,7 +119,7 @@ public class MenuFragment extends Fragment {
             itemId = foodItem.getFoodId();
             itemName = foodItem.getName();
             price = foodItem.getPrice();
-            sold = foodItem.isSoldOut();
+            soldOut = foodItem.isSoldOut();
         }
 
 
@@ -130,7 +130,7 @@ public class MenuFragment extends Fragment {
         params.add("food_item_id", String.valueOf(itemId));
         params.add("name", String.valueOf(itemName));
         params.add("price", String.valueOf(price));
-        params.add("soldOut", String.valueOf(sold));
+        params.add("soldOut", String.valueOf(soldOut));
 
 //        AsyncHttpClient client = new AsyncHttpClient();
 //        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
