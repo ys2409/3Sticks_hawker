@@ -263,8 +263,9 @@ public class AddFoodItemActivity extends AppCompatActivity {
         params.put("price", String.format("%.2f", price));
         params.put("waitTime", String.format("%.2f", waitTime));
         params.put("included", alIncluded);
+        params.put("soldOut", String.valueOf(0));
 
-        String url = "https://3stickscustomer.000webhostapp.com/Customer/addFoodItem.php";
+        String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_H/addFoodItem.php";
 
         client.post(url, params, new JsonHttpResponseHandler() {
             @Override
