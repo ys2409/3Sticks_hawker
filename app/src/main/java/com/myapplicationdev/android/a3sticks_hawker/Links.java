@@ -9,4 +9,5 @@ public class Links {
     String getProfile = url + "getProfile.php";
     String getAllFoods = url + "getAllFoods.php";
     String editPassword = url + "editPassword.php";
+    String doRegister = url + "doRegister.php";
 }

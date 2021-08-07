@@ -2,4 +2,6 @@
     <string name="app_name">3Sticks_hawker</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reset_password">Please enter the email that you have registered an account with.
+        \n\nA one-time password will be sent to you.</string>
 </resources>

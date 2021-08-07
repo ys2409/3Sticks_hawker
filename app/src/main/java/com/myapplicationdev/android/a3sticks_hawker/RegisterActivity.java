@@ -43,31 +43,31 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPasswordRegister);
         etEmail = findViewById(R.id.etEmailRegister);
         btnRegister = findViewById(R.id.btnRegister);
-        checkBoxShow = findViewById(R.id.checkBoxShow);
+        checkBoxShow = findViewById(R.id.checkBoxRegister);
 
         client = new AsyncHttpClient();
 
         checkBoxShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkBoxShow.getText().toString().equals("Hide")) {
+                if (checkBoxShow.isChecked() == true) {
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    checkBoxShow.setText("Hide");
                 } else {
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    checkBoxShow.setText("Show");
                 }
             }
         });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
+            Links links = new Links();
+            String url = links.doRegister;
             @Override
             public void onClick(View view) {
                 RequestParams params = new RequestParams();
                 params.add("number", etNum.getText().toString());
                 params.add("password", etPassword.getText().toString());
                 params.add("email_address", etEmail.getText().toString());
-                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/doRegister.php", params, new JsonHttpResponseHandler(){
+                client.post(url, params, new JsonHttpResponseHandler(){
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

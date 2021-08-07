@@ -1,8 +1,11 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import org.apache.commons.lang3.RandomStringUtils;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.text.method.HideReturnsTransformationMethod;
@@ -157,6 +161,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+//        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+//                LayoutInflater inflater = getLayoutInflater();
+//                View layout = inflater.inflate(R.layout.dialog_reset_password, null);
+//
+//                EditText resetEmail = layout.findViewById(R.id.email);
+//
+//                builder.setView(layout);
+//                builder.setCancelable(false);
+//                builder.setNeutralButton("Cancel", null);
+//                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String tempPass = RandomStringUtils.randomAlphanumeric(12);
+//                        String email = resetEmail.getText().toString();
+//                        // Do email
+//                        resetPassword(email, tempPass);
+//                    }
+//                });
+//
+//                final AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+//            }
+//        });
 
     }
 
