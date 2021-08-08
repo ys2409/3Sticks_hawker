@@ -132,31 +132,6 @@ public class MenuFragment extends Fragment {
         params.add("price", String.valueOf(price));
         params.add("soldOut", String.valueOf(soldOut));
 
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.get("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/getFoodItem.php", new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                //called when response HTTP status is "200 OK"
-//                try {
-//                    for (int i = 0; i < response.length(); i++) {
-//                        JSONObject food = (JSONObject) response.get(i);
-//                        int id = food.getInt("food_item_id");
-//                        String name = food.getString("name");
-//                        double price = food.getDouble("price");
-//
-//                        FoodItem foodItem = new FoodItem(id, name, price);
-//
-//                        alItems.add(foodItem);
-//                    }
-//
-//                    gaItems.notifyDataSetChanged();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
         gvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -207,20 +182,19 @@ public class MenuFragment extends Fragment {
                         JSONObject food = (JSONObject) response.get(i);
                         int id = food.getInt("food_item_id");
                         String soldOut = food.getString("soldOut");
-                        if (soldOut == "1"){
+                        if (soldOut == "1") {
                             String name = food.getString("name");
                             double price = food.getDouble("price");
                             String image = food.getString("image");
 
-                            FoodItem foodItem = new FoodItem(id, name, price, image , true);
+                            FoodItem foodItem = new FoodItem(id, name, price, image, true);
                             alItems.add(foodItem);
-                        }
-                        else {
+                        } else {
                             String name = food.getString("name");
                             double price = food.getDouble("price");
                             String image = food.getString("image");
 
-                            FoodItem foodItem = new FoodItem(id, name, price, image , false);
+                            FoodItem foodItem = new FoodItem(id, name, price, image, false);
 
                             alItems.add(foodItem);
                         }

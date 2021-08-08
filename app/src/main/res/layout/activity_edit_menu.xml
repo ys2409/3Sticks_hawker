@@ -54,7 +54,6 @@
             android:layout_marginBottom="15dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            android:text="Price: $"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </LinearLayout>

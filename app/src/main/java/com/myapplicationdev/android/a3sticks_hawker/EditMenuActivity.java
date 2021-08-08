@@ -66,16 +66,11 @@ public class EditMenuActivity extends AppCompatActivity {
         imgFood = findViewById(R.id.foodImg2);
         tvSoldOut = findViewById(R.id.tvSoldOut);
 
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
         client = new AsyncHttpClient();
 
         Intent intent = getIntent();
         foodItem = (FoodItem) intent.getSerializableExtra("food");
-
-        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
-        int foodId = prefs.getInt("foodId", 1);
+        int foodId = foodItem.getFoodId();
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String name = pref.getString("name", "");
@@ -162,12 +157,11 @@ public class EditMenuActivity extends AppCompatActivity {
         btnSold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (foodItem.isSoldOut() == false){
+                if (foodItem.isSoldOut() == false) {
                     soldOut = true;
                     tvSoldOut.setText("Sold Out");
                     btnSold.setText("Sell");
-                }
-                else {
+                } else {
                     soldOut = false;
                     tvSoldOut.setText("");
                     btnSold.setText("Sold Out");
@@ -214,7 +208,7 @@ public class EditMenuActivity extends AppCompatActivity {
                 params.put("price", String.format("%.2f", editPrice));
 
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.post("https://3stickscustomer.000webhostapp.com/Hawker/EditFoodItems.php", new JsonHttpResponseHandler() {
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/editFoodItem.php",params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
@@ -227,15 +221,18 @@ public class EditMenuActivity extends AppCompatActivity {
                                 prefEdit.putString("price", String.valueOf(editPrice));
                                 prefEdit.commit();
 
-                                getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.container, new MenuFragment())
-                                        .commit();
+                                finish();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                        Log.i("update fail", responseString);
                     }
                 });
             }
