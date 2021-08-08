@@ -64,34 +64,40 @@ public class ChangePassword extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestParams params = new RequestParams();
-                params.add("ownerID", ownerID);
-                params.add("password", etPassword.getText().toString());
-                Log.d("TAG", params.toString());
 
-                client.post(url, params, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        //called when response HTTP status is "200 OK"
-                        try {
-                            Toast.makeText(getApplicationContext(), "Password successfully updated", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                if (!etPassword.getText().toString().equals("")) {
+                    RequestParams params = new RequestParams();
+                    params.add("ownerID", ownerID);
+                    params.add("password", etPassword.getText().toString());
+                    Log.d("TAG", params.toString());
+
+                    client.post(url, params, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            //called when response HTTP status is "200 OK"
+                            try {
+                                Toast.makeText(getApplicationContext(), "Password successfully updated", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            //aaProfile.notifyDataSetChanged();
                         }
-                        //aaProfile.notifyDataSetChanged();
-                    }
 
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
-                        Log.d("Failed: ", responseString);
-                    }
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            super.onFailure(statusCode, headers, responseString, throwable);
+                            Log.d("Failed: ", responseString);
+                        }
 
-                });
-                Log.d("TAG", "onCreate: ");
-                Intent y = new Intent(ChangePassword.this, LoginActivity.class);
-                startActivity(y);
+                    });
+                    Log.d("TAG", "onCreate: ");
+                    Intent y = new Intent(ChangePassword.this, LoginActivity.class);
+                    startActivity(y);
+                }else{
+                    etPassword.setError("Please enter new password");
+                }
             }
+
         });
     }
 
