@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "760813898183",
+    "project_id": "sticks-a223f",
+    "storage_bucket": "sticks-a223f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760813898183:android:34e1d29a8177e512eb71e2",
+        "android_client_info": {
+          "package_name": "com.myapplicationdev.android.a3sticks_hawker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760813898183-9oue1sm86uidipce8r60o0ar7oqbb3c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkyiz-e0vjRwb59WBgTiyXP6iapvCiOEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760813898183-9oue1sm86uidipce8r60o0ar7oqbb3c6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,19 +1,10 @@
 package com.myapplicationdev.android.a3sticks_hawker;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -25,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -34,12 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-
-import static androidx.core.content.ContextCompat.getSystemService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OrderFragment extends Fragment {
     Toolbar toolbar;
@@ -54,8 +47,9 @@ public class OrderFragment extends Fragment {
     ArrayAdapter aa;
     SwipeRefreshLayout swipeRefresh;
 //    ViewOrderAdapter adapter;
-    int requestCode = 123;
-    int notificationID = 888;
+
+    // for notification
+    int customerID = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,8 +89,6 @@ public class OrderFragment extends Fragment {
         Links links = new Links();
 
         alOrder = new ArrayList<Order>();
-//        adapter = new ViewOrderAdapter(getContext(), R.layout.row2, alOrder);
-//        lvDetails.setAdapter(adapter);
 
         getOrderById();
 
@@ -104,32 +96,43 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // codes to notify customer when food is ready to collect
+                if (customerID != 0) {
+                    String TOPIC = "/topics/order" + customerID;
 
+                    String title = "Order Ready";
+                    String content = "Your order is ready for collection";
+
+                    Notification message = new Notification(title, content);
+                    PushNotification data = new PushNotification(message, TOPIC);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(Constants.BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    NotificationAPI apiService =
+                            retrofit.create(NotificationAPI.class);
+                    Call<Response> call = apiService.postNotification(data);
+                    call.enqueue(new Callback<Response>() {
+                        @Override
+                        public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                            if (!response.isSuccessful()) {
+                                Log.d("TAG", String.valueOf(response.code()));
+                                return;
+                            }
+
+                            Toast.makeText(getContext(), "Notification Sent", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Response> call, Throwable t) {
+                            Log.d("TAG", t.getMessage());
+                        }
+                    });
+                } else {
+                    Log.d("notification error", "customerID is empty");
+                }
             }
         });
-
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.get("https://3stickscustomer.000webhostapp.com/Hawker/getOrderById.php", new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                //called when response HTTP status is "200 OK"
-//                try {
-//                    for (int i = 0; i < response.length(); i++) {
-//                        JSONObject m = (JSONObject) response.get(i);
-//                        Order item = new Order(m.getInt("order_id"), new String[]{String.valueOf(m.getJSONArray("food_items"))}, m.getDouble("total_price"), m.getString("special"));
-//                        alOrder.add(item);
-//                        if (String.valueOf(item.getId()) == String.valueOf(orderId)) {
-//                            tvTotal.setText(String.valueOf(item.getTotal_price()));
-//                            aa.add(item.getItems());
-//                            lvDetails.setAdapter(aa);
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//
-//                }
-//                aaItems.notifyDataSetChanged();
-//            }
-//        });
 
         return view;
     }
@@ -152,6 +155,7 @@ public class OrderFragment extends Fragment {
                     // for order
                     int id = response.getInt("order_id");
                     double total = response.getDouble("total_price");
+                    customerID = response.getInt("customer_id");
                     tvTotal.setText(String.format("$%.2f", total));
 
                     // for items in order
@@ -199,8 +203,6 @@ public class OrderFragment extends Fragment {
 
                         Order order = new Order(id, name, qty, price, allItems);
                         alOrder.add(order);
-
-                        Log.i(String.valueOf(i), allItems);
                     }
                     ViewOrderAdapter adapter = new ViewOrderAdapter(getContext(), R.layout.row2, alOrder);
                     lvDetails.setAdapter(adapter);
