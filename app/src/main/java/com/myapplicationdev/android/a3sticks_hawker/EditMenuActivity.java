@@ -80,7 +80,7 @@ public class EditMenuActivity extends AppCompatActivity {
         String img = foodItem.getImage();
         Boolean sold = foodItem.isSoldOut();
 
-        if (!sold) {
+        if (sold) {
             soldOut = true;
             tvSoldOut.setText("Sold Out");
             btnSold.setText("Sell");
@@ -173,7 +173,8 @@ public class EditMenuActivity extends AppCompatActivity {
         btnSold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (foodItem.isSoldOut() == false) {
+
+                if (soldOut == false) {
                     soldOut = true;
                     tvSoldOut.setText("Sold Out");
                     btnSold.setText("Sell");

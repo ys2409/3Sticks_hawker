@@ -182,7 +182,7 @@ public class MenuFragment extends Fragment {
                         JSONObject food = (JSONObject) response.get(i);
                         int id = food.getInt("food_item_id");
                         String soldOut = food.getString("soldOut");
-                        if (soldOut == "1") {
+                        if (soldOut.equals("1")) {
                             String name = food.getString("name");
                             double price = food.getDouble("price");
                             String image = food.getString("image");
