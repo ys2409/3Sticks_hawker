@@ -80,6 +80,16 @@ public class EditMenuActivity extends AppCompatActivity {
         String img = foodItem.getImage();
         Boolean sold = foodItem.isSoldOut();
 
+        if (!sold) {
+            soldOut = true;
+            tvSoldOut.setText("Sold Out");
+            btnSold.setText("Sell");
+        } else {
+            soldOut = false;
+            tvSoldOut.setText("");
+            btnSold.setText("Sold Out");
+        }
+
         if (foodId == -1) {
             tvName.setVisibility(View.GONE);
         } else {
@@ -119,10 +129,10 @@ public class EditMenuActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         RequestParams params = new RequestParams();
-                        params.add("foodId", String.valueOf(foodId));
+                        params.add("food_item_id", String.valueOf(foodId));
 
                         AsyncHttpClient client = new AsyncHttpClient();
-                        client.post("https://3stickscustomer.000webhostapp.com/Hawker/deleteFoodItems.php", new JsonHttpResponseHandler() {
+                        client.get("https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/deleteFoodItems.php", params, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 try {
@@ -144,6 +154,12 @@ public class EditMenuActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                super.onFailure(statusCode, headers, responseString, throwable);
+                                Log.i("delete item fail", responseString);
                             }
                         });
 
@@ -172,7 +188,7 @@ public class EditMenuActivity extends AppCompatActivity {
                 params.add("soldOut", String.valueOf(soldOut));
 
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.post("https://3stickscustomer.000webhostapp.com/Hawker/EditFoodItems.php", new JsonHttpResponseHandler() {
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/editFoodItem.php", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
@@ -185,15 +201,17 @@ public class EditMenuActivity extends AppCompatActivity {
                                 prefEdit.putBoolean("soldOut", soldOut);
                                 prefEdit.commit();
 
-                                getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.container, new MenuFragment())
-                                        .commit();
+                                finish();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.i("soldOut fail", responseString);
                     }
                 });
             }
@@ -208,7 +226,7 @@ public class EditMenuActivity extends AppCompatActivity {
                 params.put("price", String.format("%.2f", editPrice));
 
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.post("https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/editFoodItem.php",params, new JsonHttpResponseHandler() {
+                client.post("https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/editFoodItem.php", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {

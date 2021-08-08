@@ -220,34 +220,6 @@ public class AddFoodItemActivity extends AppCompatActivity {
                     addItem();
                 }
 
-//                int lastId = alItems.size() - 1;
-//                Bundle bundle = new Bundle();
-//                FoodItem food = new FoodItem(lastId + 1, etName.getText().toString(), Double.parseDouble(etPrice.getText().toString()));
-//                bundle.putSerializable("foodItem", food);
-//
-//                client.post("http://10.0.2.2/3Sticks_hawker/3Sticks_hawker/addFoodItem.php", new JsonHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                        //called when response HTTP status is "200 OK"
-//                        try {
-//                            String result = response.getString("inserted");
-//                            if (result.contains("Success")) {
-//                                String msg = "Added to order";
-//                                Toast.makeText(AddFoodItemActivity.this, msg, Toast.LENGTH_SHORT).show();
-//                                getSupportFragmentManager()
-//                                        .beginTransaction()
-//                                        .replace(R.id.container, new MenuFragment())
-//                                        .commit();
-//                            } else {
-//                                String msg = "Failed to add to order";
-//                                Toast.makeText(AddFoodItemActivity.this, msg, Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-
             }
         });
     }
@@ -261,11 +233,11 @@ public class AddFoodItemActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("name", etName.getText().toString());
         params.put("price", String.format("%.2f", price));
-        params.put("waitTime", String.format("%.2f", waitTime));
+        params.put("waitTime", String.valueOf(waitTime));
         params.put("included", alIncluded);
         params.put("soldOut", String.valueOf(0));
 
-        String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_H/addFoodItem.php";
+        String url = "https://3stickscustomer.000webhostapp.com/Hawker/3Sticks_hawker/addFoodItem.php";
 
         client.post(url, params, new JsonHttpResponseHandler() {
             @Override
