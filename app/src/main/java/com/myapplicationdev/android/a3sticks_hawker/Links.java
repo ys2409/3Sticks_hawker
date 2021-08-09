@@ -10,4 +10,6 @@ public class Links {
     String getAllFoods = url + "getAllFoods.php";
     String editPassword = url + "editPassword.php";
     String doRegister = url + "doRegister.php";
+
+    String sendEmail = "https://3stickscustomer.000webhostapp.com/Customer/sendEmail.php";
 }

@@ -20,6 +20,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class ChangePassword extends AppCompatActivity {
     EditText etPassword;
     Button btnConfirm;
     Toolbar toolbar;
+    String ownerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class ChangePassword extends AppCompatActivity {
         toolbar.getNavigationIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ChangePassword.this);
-        String ownerID = prefs.getString("ownerID", "");
+        ownerID = prefs.getString("ownerID", "");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,48 +60,51 @@ public class ChangePassword extends AppCompatActivity {
             }
         });
 
-        Links link = new Links();
-        String url = link.editPassword;
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!etPassword.getText().toString().equals("")) {
-                    RequestParams params = new RequestParams();
-                    params.add("ownerID", ownerID);
-                    params.add("password", etPassword.getText().toString());
-                    Log.d("TAG", params.toString());
-
-                    client.post(url, params, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            //called when response HTTP status is "200 OK"
-                            try {
-                                Toast.makeText(getApplicationContext(), "Password successfully updated", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            //aaProfile.notifyDataSetChanged();
-                        }
-
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                            super.onFailure(statusCode, headers, responseString, throwable);
-                            Log.d("Failed: ", responseString);
-                        }
-
-                    });
-                    Log.d("TAG", "onCreate: ");
-                    Intent y = new Intent(ChangePassword.this, LoginActivity.class);
-                    startActivity(y);
-                }else{
-                    etPassword.setError("Please enter new password");
-                }
+                changePassword();
             }
 
         });
     }
 
+    public void changePassword() {
+        Links link = new Links();
+        String url = link.editPassword;
 
+        if (!etPassword.getText().toString().equals("")) {
+            RequestParams params = new RequestParams();
+            params.add("ownerID", ownerID);
+            params.add("password", etPassword.getText().toString());
+            Log.d("TAG", params.toString());
+
+            client.post(url, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //called when response HTTP status is "200 OK"
+                    try {
+                        Toast.makeText(getApplicationContext(), "Password successfully updated", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //aaProfile.notifyDataSetChanged();
+                }
+
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Log.d("Failed: ", responseString);
+                }
+
+            });
+            Log.d("TAG", "onCreate: ");
+            Intent y = new Intent(ChangePassword.this, LoginActivity.class);
+            startActivity(y);
+        } else {
+            etPassword.setError("Please enter new password");
+        }
+    }
 }

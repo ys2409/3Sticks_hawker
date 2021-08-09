@@ -5,7 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+
 import org.apache.commons.lang3.RandomStringUtils;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etNumber;
     private AsyncHttpClient client;
     CheckBox checkBox;
+    Links links = new Links();
 
     int view = R.layout.activity_main;
 
@@ -106,9 +109,28 @@ public class LoginActivity extends AppCompatActivity {
 
         btnForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent x = new Intent(LoginActivity.this, ChangePassword.class);
-                startActivity(x);
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.dialog_reset_password, null);
+
+                EditText resetEmail = layout.findViewById(R.id.email);
+
+                builder.setView(layout);
+                builder.setCancelable(false);
+                builder.setNeutralButton("Cancel", null);
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String tempPass = RandomStringUtils.randomAlphanumeric(12);
+                        String email = resetEmail.getText().toString();
+                        // Do email
+                        resetPassword(email, tempPass);
+                    }
+                });
+
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -161,34 +183,52 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-//                LayoutInflater inflater = getLayoutInflater();
-//                View layout = inflater.inflate(R.layout.dialog_reset_password, null);
-//
-//                EditText resetEmail = layout.findViewById(R.id.email);
-//
-//                builder.setView(layout);
-//                builder.setCancelable(false);
-//                builder.setNeutralButton("Cancel", null);
-//                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        String tempPass = RandomStringUtils.randomAlphanumeric(12);
-//                        String email = resetEmail.getText().toString();
-//                        // Do email
-//                        resetPassword(email, tempPass);
-//                    }
-//                });
-//
-//                final AlertDialog alertDialog = builder.create();
-//                alertDialog.show();
-//            }
-//        });
-
     }
 
+    public void resetPassword(String email, String tempPass){
+        String url = links.sendEmail;
+        RequestParams params = new RequestParams();
+        params.put("userEmail", email);
+        params.put("tempPass", tempPass);
+        params.put("client", "hawker");
+
+        client.post(url, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Boolean exist = response.getBoolean("exist");
+
+                    if (!exist) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setTitle("User does not exist");
+                        builder.setMessage("Please check if you have entered the correct email address.");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("Ok", null);
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    } else {
+                        Boolean sent = response.getBoolean("sent");
+                        String result = response.getString("result");
+
+                        if (sent) {
+                            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.i("email error", response.getString("error"));
+                            Toast.makeText(LoginActivity.this, "error sending email", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i("Forgot Password", responseString);
+            }
+        });
+    }
 
 }
