@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etNum;
     CheckBox checkBoxShow;
     EditText etPassword;
-    EditText etEmail;
+    EditText etEmail, etName, etStallID;
     private AsyncHttpClient client;
     Button btnRegister;
 
@@ -42,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         etNum = findViewById(R.id.etNumberRegister);
         etPassword = findViewById(R.id.etPasswordRegister);
         etEmail = findViewById(R.id.etEmailRegister);
+        etName = findViewById(R.id.etName);
+        etStallID = findViewById(R.id.etStallID);
         btnRegister = findViewById(R.id.btnRegister);
         checkBoxShow = findViewById(R.id.checkBoxRegister);
 
@@ -61,13 +63,16 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             Links links = new Links();
             String url = links.doRegister;
+
             @Override
             public void onClick(View view) {
                 RequestParams params = new RequestParams();
                 params.add("number", etNum.getText().toString());
+                params.add("name", etName.getText().toString());
                 params.add("password", etPassword.getText().toString());
+                params.add("stallID", etStallID.getText().toString());
                 params.add("email_address", etEmail.getText().toString());
-                client.post(url, params, new JsonHttpResponseHandler(){
+                client.post(url, params, new JsonHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -78,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         super.onFailure(statusCode, headers, responseString, throwable);
                         Log.d("Failed: ", responseString);

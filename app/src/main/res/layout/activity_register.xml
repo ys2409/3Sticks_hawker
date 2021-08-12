@@ -39,6 +39,19 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:backgroundTint="@color/teal_200"
+            android:textColorHint="@color/teal_200"
+            android:textColor="@color/teal_200"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
+
+        <EditText
             android:id="@+id/etNumberRegister"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
@@ -104,6 +117,19 @@
             android:textAlignment="center"
             android:textColor="@color/teal_200"
             android:textColorHint="@color/teal_200" />
+
+        <EditText
+            android:id="@+id/etStallID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stall ID"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:backgroundTint="@color/teal_200"
+            android:textColorHint="@color/teal_200"
+            android:textColor="@color/teal_200"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
